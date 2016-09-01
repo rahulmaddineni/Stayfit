@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F44336</color>
+    <color name="colorPrimaryDark">#E53935</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="yellow">#FFEB3B</color>
+    <color name="darkyellow">#FDD835</color>
+    <color name="black">#000000</color>
+    <color name="red">#ff0000</color>
+    <color name="lightgrey">#9E9E9E</color>
+    <color name="green">#26A69A</color>
+    <color name="syracuseorange">#D95900</color>
+    <color name="syracuseblue">#4A20AB</color>
+    <color name="fats">#F7CA18</color>
+    <color name="carbs">#22A7F0</color>
+    <color name="protein">#F22613</color>
+    <color name="appintro1">#EDD834</color>
+    <color name="appintro2">#FF7E55</color>
+    <color name="appintro3">#FADAA3</color>
+    <color name="appintro4">#72BAAC</color>
+    <color name="foreground_material_light">#f7f2e5</color>
+    <color name="darkblue">#0B0080</color>
+    <color name="blue">#3162D7</color>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/loc"
+    tools:context=".AskLocationActivity">
+    <fragment
+        android:id="@+id/place_autocomplete_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:id="@+id/invite"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/actionButton"
+        android:layout_marginTop="30dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textb"
+        android:text="Location:"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:layout_marginTop="90dp"/>
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Address"
+        android:id="@+id/addressEdit"
+        android:layout_below="@+id/textb"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:enabled="false"
+        android:scrollbars="vertical"
+        android:scrollHorizontally="false"
+        android:minLines="4"
+        android:gravity="top"
+        android:editable="false"
+        android:layout_marginRight="70dp"
+        android:background="#FFFFFF"/>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/actionButton"
+        android:layout_below="@id/addressEdit"
+        android:layout_centerHorizontal="true"
+        android:onClick="onButtonClicked"
+        android:text="Confirm Location?"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/green"
+        />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/infoText"
+        android:layout_below="@id/actionButton"/>
+</RelativeLayout>

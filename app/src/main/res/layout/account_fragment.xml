@@ -1,0 +1,111 @@
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="match_parent" tools:context=".MainActivityFragment"
+        android:id = "@+id/container"
+        android:layout_marginTop="30dp">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="60dp"
+            android:id="@+id/referIcon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/icon_friend"/>
+
+        <TextView
+            android:text="@string/txt2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/referText"
+            android:paddingTop="15dp"
+            android:textSize="22dp"
+            android:textIsSelectable="true"
+            android:layout_marginLeft="10dp"
+            android:layout_alignTop="@+id/referIcon"
+            android:layout_toEndOf="@+id/referIcon"
+            android:layout_toRightOf="@+id/referIcon"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/rateIcon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/referIcon"
+            android:src="@drawable/icon_star"/>
+
+        <TextView
+            android:text="@string/txt3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/rateText"
+            android:paddingTop="15dp"
+            android:textSize="22dp"
+            android:textIsSelectable="true"
+            android:layout_marginLeft="10dp"
+            android:layout_alignTop="@+id/rateIcon"
+            android:layout_toEndOf="@+id/rateIcon"
+            android:layout_toRightOf="@+id/rateIcon"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/feedbackIcon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/rateIcon"
+            android:src="@drawable/icon_feedback"/>
+
+        <TextView
+            android:text="@string/txt4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/feedbackText"
+            android:paddingTop="15dp"
+            android:textSize="22dp"
+            android:textIsSelectable="true"
+            android:layout_marginLeft="10dp"
+            android:layout_alignTop="@+id/feedbackIcon"
+            android:layout_toEndOf="@+id/feedbackIcon"
+            android:layout_toRightOf="@+id/feedbackIcon"/>
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:id="@+id/settingsIcon"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/feedbackIcon"
+            android:src="@drawable/icon_settings"/>
+
+        <TextView
+            android:text="Change Goal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id = "@+id/settingsText"
+            android:paddingTop="15dp"
+            android:textSize="22dp"
+            android:textIsSelectable="true"
+            android:layout_marginLeft="10dp"
+            android:layout_alignTop="@+id/settingsIcon"
+            android:layout_toEndOf="@+id/settingsIcon"
+            android:layout_toRightOf="@+id/settingsIcon"/>
+
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

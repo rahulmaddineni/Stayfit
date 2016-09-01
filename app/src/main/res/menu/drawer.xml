@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item1"
+            android:checked="false"
+            android:icon="@drawable/summary"
+            android:title="Summary"/>
+
+        <item
+            android:id="@+id/item2"
+            android:checked="false"
+            android:icon="@drawable/overview"
+            android:title="OverView"/>
+
+        <item
+            android:id="@+id/item3"
+            android:checked="false"
+            android:icon="@drawable/settings"
+            android:title="Settings"/>
+
+        <item
+            android:id="@+id/item4"
+            android:checked="false"
+            android:icon="@drawable/logout"
+            android:title="Log Out"/>
+
+    </group>
+</menu>

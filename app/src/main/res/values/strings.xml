@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">StayFit</string>
+    <string name="fit_cycling">Cycling</string>
+    <string name="fit_running">Running</string>
+    <string name="step_counter">
+         android.hardware.sensor.stepcounter
+    </string>
+    <string name="step_detector">
+         android.hardware.sensor.stepdetector
+    </string>
+    <string name="facebook_app_id">207303182991184</string><string name="action_settings">Settings</string>
+    <string name="txt1">Linked Account</string>
+    <string name="txt2">Refer A Friend</string>
+    <string name="txt3">Rate Us</string>
+    <string name="txt4">Feedback</string>
+    <string name="txt5">Settings</string>
+    <string name="txt6">Sample</string>
+    <string name="basic1">Name</string>
+    <string name="nameDB">Shah Rukh Khan</string>
+    <string name="nameHint">Enter name</string>
+    <string name="basic2">Phone Number</string>
+    <string name="phoneDB">315-443-1234</string>
+    <string name="phoneHint">Enter Phone Number</string>
+    <string name="basic3">Gender</string>
+    <string name="basic3radio1">Male</string>
+    <string name="basic3radio2">Female</string>
+    <string name="basic4">Age</string>
+    <string name="ageHint">Enter Age</string>
+    <string name="ageDB">50</string>
+    <string name="basic5">Height</string>
+    <string-array name="HeightDropDownFt">
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string name="ftHint">Ft</string>
+    <string-array name="HeightDropDownIn">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+    </string-array>
+    <string name="inHint">In</string>
+    <string name="basic6">Weight</string>
+    <string name="weightHint">Enter Weight</string>
+    <string-array name="weightDropDown">
+        <item>Kgs</item>
+        <item>Lbs</item>
+    </string-array>
+    <string name="text1">Enter the information</string>
+    <string name="text2">Steps</string>
+    <string name="text3">Calories</string>
+    <string name="text4">Frequency</string>
+    <string name="text5">Daily</string>
+    <string name="text6">Weekly</string>
+    <string name="text7">Monthly</string>
+    <string name="text8">Weight Goal</string>
+    <string name="text9">Calorie Goal</string>
+    <string name="text10">Steps Goal</string>
+    <string name="goalHeading">Enter Goal</string>
+
+
+// Maps Key
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCGLn_w9x11JVAXa0kGB9lpGDYJShXDjBg</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+    <string name="my_name">Santosh Dheeraj Yelamarthi</string>
+    <string name="my_email">syelamar@syr.edu</string>
+
+    <string name="tab1Heading">RUN - Running Video</string>
+    <string name="tab1Text">RUN - Running Video</string>
+    <string name="tab1VideoID">gF0rrpMH-Jo</string>
+    <string name="tab2Heading">Inspirational Running Video</string>
+    <string name="tab2Text">Inspirational Running Video</string>
+    <string name="tab2VideoID">FZk40J_drws</string>
+    <string name="tab3Heading">Nike: Last</string>
+    <string name="tab3Text">Nike: Last</string>
+    <string name="tab3VideoID">yMZB8X4CG6E</string>
+
+</resources>

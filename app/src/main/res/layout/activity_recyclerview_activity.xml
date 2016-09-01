@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    >
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rcmain"
+        >
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent" android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/cardList"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="70dp"
+                android:focusableInTouchMode="true"/>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/vsfb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/voice"
+                app:elevation="4dp"
+                android:layout_gravity="right|bottom"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:visibility="visible"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true" />
+
+
+        </RelativeLayout>
+        <TextView
+            android:layout_width="380dp"
+            android:layout_height="470dp"
+            android:text="New Text"
+            android:id="@+id/textView2"
+            android:layout_alignTop="@+id/cardList"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+    </FrameLayout>
+</RelativeLayout>

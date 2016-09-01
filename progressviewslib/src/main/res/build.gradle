@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+
+
+version = "1.0.1"
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 11
+        targetSdkVersion 21
+        applicationId "com.natasa.progressviews"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+        }
+    }
+}
+dependencies {
+
+}
+ext {
+    PUBLISH_GROUP_ID = 'com.natasa.progressviews'
+    PUBLISH_ARTIFACT_ID = 'android-progressviewslib'
+    PUBLISH_VERSION = version
+}

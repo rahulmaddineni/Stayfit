@@ -1,0 +1,262 @@
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+        android:layout_height="515dp" tools:context=".MainActivityFragment"
+        android:id = "@+id/container"
+        android:background="@color/foreground_material_light"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:text="@string/basic1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/nameTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="40dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:textIsSelectable="true"
+            android:textColor="#800000"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"/>
+
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:hint="Enter Your Name"
+            android:paddingTop="10dp"
+            android:inputType="text"
+            android:textSize="18sp"
+            android:layout_toEndOf="@id/nameTitle"
+            android:layout_alignParentEnd="false"
+            android:layout_alignBottom="@id/nameTitle"/>
+
+        <TextView
+            android:text="Mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/phoneTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:textIsSelectable="true"
+            android:textColor="#800000"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/nameTitle"/>
+        <EditText
+            android:id="@+id/phoneInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/phoneDB"
+            android:paddingTop="10dp"
+            android:inputType="phone"
+            android:textSize="18sp"
+            android:layout_toEndOf="@id/phoneTitle"
+            android:layout_alignParentEnd="false"
+            android:layout_alignBottom="@id/phoneTitle"/>
+
+
+        <TextView
+            android:text="@string/basic3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/genderTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:textIsSelectable="true"
+            android:textColor="#800000"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/phoneTitle"/>
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@id/genderTitle"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@id/genderTitle"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/maleRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic3radio1"/>
+            <RadioButton
+                android:id="@+id/femaleRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/basic3radio2"/>
+        </RadioGroup>
+
+
+        <TextView
+            android:text="@string/basic4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/ageTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:textIsSelectable="true"
+            android:textColor="#800000"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/genderTitle"/>
+        <EditText
+            android:id="@+id/ageInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:width="40dp"
+            android:paddingTop="10dp"
+            android:inputType="number"
+            android:textSize="18sp"
+            android:layout_marginLeft="25dp"
+            android:layout_toEndOf="@id/ageTitle"
+            android:layout_alignParentEnd="false"
+            android:layout_alignBottom="@id/ageTitle"/>
+
+
+        <TextView
+            android:text="@string/basic5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/heightTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:textIsSelectable="true"
+            android:textColor="#800000"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/ageTitle"/>
+
+        <EditText
+            android:id="@+id/heightInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/heightTitle"
+            android:paddingTop="10dp"
+            android:inputType="phone"
+            android:textSize="18sp"
+            android:width="50dp"
+            android:layout_marginTop="203dp"
+            android:layout_marginLeft="3dp"
+            android:layout_alignParentEnd="false"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ftHint"
+            android:text="cms"
+            android:textColor="#800000"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/heightInput"
+            android:layout_alignBottom="@id/heightTitle"/>
+
+        <TextView
+            android:text="@string/basic6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/weightTitle"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="10dp"
+            android:textIsSelectable="true"
+            android:textColor="#800000"
+            android:textSize="18sp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@id/heightTitle"/>
+        <EditText
+            android:id="@+id/weightInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:width="50dp"
+            android:paddingTop="10dp"
+            android:inputType="number"
+            android:layout_marginLeft="2dp"
+            android:textSize="18sp"
+            android:layout_toEndOf="@id/weightTitle"
+            android:layout_alignBottom="@id/weightTitle"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/whint"
+            android:text="kg"
+            android:textColor="#800000"
+            android:paddingBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toEndOf="@id/weightInput"
+            android:layout_alignBottom="@id/weightTitle"/>
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_below="@+id/weightTitle"
+            android:src="@drawable/bmi"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="40dp"
+            android:id="@+id/bmiimage"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BMI"
+            android:textSize="25dp"
+            android:id="@+id/bmititle"
+            android:layout_toRightOf="@+id/bmiimage"
+            android:layout_below="@id/weightInput"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="90dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_toEndOf="@+id/bmititle"
+            android:layout_below="@id/weightInput"
+            android:layout_marginTop="90dp"
+            android:layout_marginLeft="30dp"
+            android:id="@+id/bmi"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_below="@+id/bmititle"
+            android:layout_toRightOf="@+id/bmiimage"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="22dp"
+            android:id="@+id/bmiresult"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/green"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/nextbutton"/>
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>
