@@ -57,3 +57,13 @@ App is targeted to people of any age:
     -Async Taks and threads
     -Service (Sensors)
     -Content provider (Contacts Picker, SMS Manager)
+
+##ScreenShots
+
+![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad1.png)
+
+![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad2.png)
+
+![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad3.png)
+
+![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad4.png)
