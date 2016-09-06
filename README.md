@@ -1,5 +1,12 @@
 # Stayfit
-About the app:
+
+##Running the app
+  Open the project in Android Studio
+  
+    - Build the app
+    - Run the app (Simulator/ Real Device - Targeted for API 22 Nexus 5 1920x1080)
+
+##About the app
 
   Fitness application that’s used to keep track of your physical fitness data, daily calorie count, invite friends to work out together and ultimately get healthy.
 
@@ -12,14 +19,14 @@ App is targeted to people of any age:
     o Wanted to take health advices from other persons (follow their public daily meal plan / workout schedule)
     o Who like to do some physical activity with friends at a gym / run-track (invite friends)
 
-Features:
+###Features:
 
     - Measures daily fitness
     - Graphical Statistics
     - Record Daily Food Activity
     - Invite Friends by sharing location
 
-Application Uses:
+###Application Uses:
 
     Database                  : Firebase
     Login and Authentication  : Firebase, Google, Facebook
@@ -30,7 +37,7 @@ Application Uses:
     Step Counter              : In-built Sensor
     Animations                : WasABeef, AppIntro, ProgressView
 
-Functionalities app consists:
+###Functionalities app consists:
 
     -Navigation Drawer
     -Recycler View
