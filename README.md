@@ -1,12 +1,12 @@
 # Stayfit
 
-##Running the app
+## Running the app
   Open the project in Android Studio
   
     - Build the app
     - Run the app (Simulator/ Real Device - Targeted for API 22 Nexus 5 1920x1080)
 
-##About the app
+## About the app
 
   Fitness application that’s used to keep track of your physical fitness data, daily calorie count, invite friends to work out together and ultimately get healthy.
 
@@ -19,14 +19,14 @@ App is targeted to people of any age:
     o Wanted to take health advices from other persons (follow their public daily meal plan / workout schedule)
     o Who like to do some physical activity with friends at a gym / run-track (invite friends)
 
-###Features:
+### Features:
 
     - Measures daily fitness
     - Graphical Statistics
     - Record Daily Food Activity
     - Invite Friends by sharing location
 
-###Application Uses:
+### Application Uses:
 
     Database                  : Firebase
     Login and Authentication  : Firebase, Google, Facebook
@@ -37,7 +37,7 @@ App is targeted to people of any age:
     Step Counter              : In-built Sensor
     Animations                : WasABeef, AppIntro, ProgressView
 
-###Functionalities app consists:
+### Functionalities app consists:
 
     -Navigation Drawer
     -Recycler View
@@ -58,12 +58,18 @@ App is targeted to people of any age:
     -Service (Sensors)
     -Content provider (Contacts Picker, SMS Manager)
 
-##ScreenShots
+## ScreenShots
 
-![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad1.png)
+![Entry Steps](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%201.jpg)
 
-![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad2.png)
+![Entry Info](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%202.jpg)
 
-![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad3.png)
+![App Intro](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%203.jpg)
 
-![Alt Text](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Ad4.png)
+![Home Screen](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%204.jpg)
+
+![Diet](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%205.jpg)
+
+![Add Food](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%206.jpg)
+
+![Share A Run](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%207.jpg)
