@@ -22,4 +22,7 @@
     <color name="foreground_material_light">#f7f2e5</color>
     <color name="darkblue">#0B0080</color>
     <color name="blue">#3162D7</color>
+    <color name="stayFitAccent">#002841</color>
+    <color name="lightText">#c1beba</color>
+    <color name="darkWash">#f2f1ef</color>
 </resources>

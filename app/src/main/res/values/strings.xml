@@ -1,5 +1,15 @@
 <resources>
+    // App values
     <string name="app_name">StayFit</string>
+
+    // Login / SignUp
+    <string name="login_text">Login</string>
+    <string name="signUp_text">SignUp</string>
+    <string name="signUp_link_text">No account yet? Create one</string>
+
+    // Google
+    <string name="google_client_id">464646136565-ucqins75bcpfs2csntfvi1pnrkqspuku.apps.googleusercontent.com</string>
+
     <string name="fit_cycling">Cycling</string>
     <string name="fit_running">Running</string>
     <string name="step_counter">

@@ -26,15 +26,15 @@
             android:layout_marginTop="10dp"
             app:progress_color="@color/carbs"
             />
+
         <com.natasa.progressviews.CircleProgressBar
             android:id="@+id/protein_progress"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="100dp"
-            app:progress_color="@color/protein"
-            />
+            android:layout_marginRight="30dp"
+            app:progress_color="@color/protein" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -8,7 +8,12 @@ import android.util.Log;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 
+import com.google.android.gms.fitness.data.DataSource;
+import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.request.DataReadRequest;
 import com.natasa.progressviews.CircleProgressBar;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by maddi on 4/20/2016.
@@ -26,7 +31,7 @@ public class FoodSummaryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_foodsummary);
         final CircleProgressBar fats = (CircleProgressBar) findViewById(R.id.fats_progress);
         final CircleProgressBar carbs = (CircleProgressBar) findViewById(R.id.carbs_progress);
-        final CircleProgressBar protein = (CircleProgressBar) findViewById(R.id.protien_progress);
+        final CircleProgressBar protein = (CircleProgressBar) findViewById(R.id.protein_progress);
 
         food_carbs = Food_MyRecyclerViewAdapter.totalcarbs;
         food_fat = Food_MyRecyclerViewAdapter.totalfat;

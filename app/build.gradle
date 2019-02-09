@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 23
@@ -68,6 +69,7 @@ dependencies {
     compile 'com.github.paolorotolo:appintro:3.4.0'                    // App intro screen
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 
+//    implementation 'com.google.firebase:firebase-auth:16.1.0'
+//    implementation 'com.google.android.gms:play-services-auth:16.0.1'
 }
-
-apply plugin: 'com.google.gms.google-services'
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
