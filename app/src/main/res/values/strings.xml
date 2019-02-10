@@ -18,6 +18,8 @@
     <string name="step_detector">
          android.hardware.sensor.stepdetector
     </string>
+    <string name="facebook_application_id" translatable="false">207303182991184</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb207303182991184</string>
     <string name="facebook_app_id">207303182991184</string><string name="action_settings">Settings</string>
     <string name="txt1">Linked Account</string>
     <string name="txt2">Refer A Friend</string>

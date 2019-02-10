@@ -8,9 +8,9 @@ import android.util.Log;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 
-import com.google.android.gms.fitness.data.DataSource;
-import com.google.android.gms.fitness.data.DataType;
-import com.google.android.gms.fitness.request.DataReadRequest;
+//import com.google.android.gms.fitness.data.DataSource;
+//import com.google.android.gms.fitness.data.DataType;
+//import com.google.android.gms.fitness.request.DataReadRequest;
 import com.natasa.progressviews.CircleProgressBar;
 
 import java.util.concurrent.TimeUnit;

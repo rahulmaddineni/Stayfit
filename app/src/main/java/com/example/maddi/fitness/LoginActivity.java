@@ -1,47 +1,44 @@
 package com.example.maddi.fitness;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
-import com.facebook.CallbackManager;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.firebase.client.AuthData;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
-import com.firebase.ui.auth.core.AuthProviderType;
-import com.firebase.ui.auth.core.FirebaseLoginBaseActivity;
-import com.firebase.ui.auth.core.FirebaseLoginError;
+import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 
-public class LoginActivity extends FirebaseLoginBaseActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    Firebase firebaseRef;
-    EditText userNameET;
-    EditText passwordET;
-    String mName;
-    PackageInfo info;
+    private static final String TAG = "LoginActivity";
 
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private boolean isAppLaunchedForFirstTime;
 
-    /* String Constants */
-    private static final String FIREBASEREF = "https://healthkit.firebaseio.com";
-    private static final String FIREBASE_ERROR = "Firebase Error";
-    private static final String USER_ERROR = "User Error";
-    private static final String LOGIN_SUCCESS = "Login Success";
-    private static final String USER_CREATION_SUCCESS =  "Successfully created user";
-    private static final String USER_CREATION_ERROR =  "User creation error";
-    private static final String EMAIL_INVALID =  "email is invalid :";
+    // Authentication providers
+    List<AuthUI.IdpConfig> providers = Arrays.asList(
+            new AuthUI.IdpConfig.EmailBuilder().build(),
+            new AuthUI.IdpConfig.PhoneBuilder().build(),
+            new AuthUI.IdpConfig.GoogleBuilder().build(),
+            new AuthUI.IdpConfig.FacebookBuilder().build());
 
     public static String USER_ID = "";
     public static String USER_EMAIL = "";
@@ -52,316 +49,268 @@ public class LoginActivity extends FirebaseLoginBaseActivity {
     public static float user_fat = 0f;
     public static float user_carbs = 0f;
     public static float user_protein = 0f;
+    public static final int RC_SIGN_IN = 0;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        Firebase.setAndroidContext(this);
-        firebaseRef = new Firebase(FIREBASEREF);
-        super.onCreate(savedInstanceState);
-        // Initialize Facebook SDK
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        CallbackManager callbackManager = CallbackManager.Factory.create();
-        setContentView(R.layout.activity_login);
-        userNameET = (EditText)findViewById(R.id.edit_text_email);
-        passwordET = (EditText)findViewById(R.id.edit_text_password);
-        Button login = (Button) findViewById(R.id.login);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LoginActivity.this.showFirebaseLoginPrompt();
-            }
-        });
-        Button createButton = (Button) findViewById(R.id.button);
-        createButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createUser();
-            }
-        });
-       /* Button forgotButton = (Button) findViewById(R.id.forgot);
-        forgotButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users");
-                ref.resetPassword("email here", new Firebase.ResultHandler() {
-                    @Override
-                    public void onSuccess() {
-                        // password reset email sent
-                    }
-                    @Override
-                    public void onError(FirebaseError firebaseError) {
-                        // error encountered
-                    }
-                });
-            }
-        });*/
-    }
+    private class User {
+        public String name;
+        public String phone;
+        public String gender;
+        public int age;
+        public String height;
+        public float weight;
+        public int stepgoal;
+        public int caloriegoal;
 
-    @Override
-    protected void onFirebaseLoginProviderError(FirebaseLoginError firebaseLoginError) {
-        Snackbar snackbar = Snackbar.
-                make(userNameET, FIREBASE_ERROR + firebaseLoginError.message, Snackbar.LENGTH_SHORT);
-        snackbar.show();
-        resetFirebaseLoginPrompt();
-    }
 
-    @Override
-    protected void onFirebaseLoginUserError(FirebaseLoginError firebaseLoginError) {
-        Snackbar snackbar = Snackbar
-                .make(userNameET, USER_ERROR + firebaseLoginError.message, Snackbar.LENGTH_SHORT);
-        snackbar.show();
-        resetFirebaseLoginPrompt();
-    }
-
-    @Override
-    public Firebase getFirebaseRef() {
-        return firebaseRef;
-    }
-
-    @Override
-    public void onFirebaseLoggedIn(AuthData authData) {
-        String ab = authData.getUid();
-        String em = (String) authData.getProviderData().get("email");
-        USER_ID = ab;
-        USER_EMAIL = em;
-        switch (authData.getProvider()) {
-            case "password":
-                mName = (String) authData.getProviderData().get("email");
-                break;
-            default:
-                mName = (String) authData.getProviderData().get("displayName");
-                break;
+        public User() {
+            // Default constructor required for calls to DataSnapshot.getValue(User.class)
         }
 
-        //Toast.makeText(getApplicationContext(), ab, Toast.LENGTH_SHORT).show();
-        // Starting Activity only first time
-        //  Initialize SharedPreferences
-        SharedPreferences getPrefs = PreferenceManager
-                .getDefaultSharedPreferences(getBaseContext());
-
-        //  Create a new boolean and preference and set it to true
-        boolean isFirstStart = getPrefs.getBoolean("firstStart", true);
-
-        //  If the activity has never started before...
-        if (isFirstStart) {
-            //  Launch app intro
-            Intent i = new Intent(LoginActivity.this, AppIntroActivity.class);
-            startActivity(i);
-
-            //  Make a new preferences editor
-            SharedPreferences.Editor e = getPrefs.edit();
-
-            //  Edit preference to make it false because we don't want this to run again
-            e.putBoolean("firstStart", false);
-
-            //  Apply changes
-            e.apply();
-
-            // Create User Info
-            Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users");
-            // if(ref.child(ab.toString())== null) {
-            ref.child(ab);
-            ref.child(ab).child("name").setValue("");
-            ref.child(ab).child("phone").setValue("");
-            // ref.child(ab).child("email").setValue("");
-            ref.child(ab).child("gender").setValue("");
-            ref.child(ab).child("age").setValue("0");
-            ref.child(ab).child("height").setValue("0");
-            ref.child(ab).child("weight").setValue("0");
-            ref.child(ab).child("stepgoal").setValue("0");
-            ref.child(ab).child("caloriegoal").setValue("0");
-            //}
-            // Create Step Info
-            Firebase sref = new Firebase("https://healthkit.firebaseio.com/Steps");
-            //if(sref.child(ab.toString())== null) {
-            sref.child(ab);
-            sref.child(ab).child("totalsteps").setValue("0");
-            //}
-            // Create Calorie Info
-            Firebase cref = new Firebase("https://healthkit.firebaseio.com/Calories");
-            //if(cref.child(ab.toString())== null) {
-            cref.child(ab);
-            cref.child(ab).child("totalcalories").setValue("0");
-            cref.child(ab).child("totalfat").setValue("0");
-            cref.child(ab).child("totalcarbs").setValue("0");
-            cref.child(ab).child("totalprotein").setValue("0");
-            //}
-        }
-        else {
-            Firebase mref = new Firebase("https://healthkit.firebaseio.com/Users/"+LoginActivity.USER_ID);
-            final Firebase[] msref = {mref.child("stepgoal")};
-            msref[0].addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getValue());
-                    Log.d("COming", "in in");
-                    mSeries1 = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
-                    Log.d("mSeries", (String.valueOf(mSeries1)));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-            final Firebase[] mcref = {mref.child("caloriegoal")};
-            mcref[0].addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getValue());
-                    Log.d("COming", "in in");
-                    mSeries2 = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
-                    Log.d("mSeries", (String.valueOf(mSeries2)));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-            final Firebase[] ncref = {mref.child("name")};
-            ncref[0].addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getValue());
-                    Log.d("COming", "in in");
-                    USER_NAME = (String.valueOf(dataSnapshot.getValue()));
-                    Log.d("mSeries", (String.valueOf(mSeries2)));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-            Firebase calorieref = new Firebase("https://healthkit.firebaseio.com/Calories/"+LoginActivity.USER_ID);
-            final Firebase[] totcalref = {calorieref.child("totalcalories")};
-            totcalref[0].addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getValue());
-                    Log.d("COming", "in in");
-                    calRef = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
-                    Log.d("User Calories", (String.valueOf(calRef)));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-            final Firebase[] totcalfat = {calorieref.child("totalfat")};
-            totcalfat[0].addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getValue());
-                    Log.d("COming", "in in");
-                    user_fat = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
-                    Log.d("User Calories", (String.valueOf(calRef)));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-            final Firebase[] totcalcarbs = {calorieref.child("totalcarbs")};
-            totcalcarbs[0].addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getValue());
-                    Log.d("COming", "in in");
-                    user_carbs = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
-                    Log.d("User Calories", (String.valueOf(calRef)));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-            final Firebase[] totcalprotein = {calorieref.child("totalprotein")};
-            totcalprotein[0].addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    System.out.println(dataSnapshot.getValue());
-                    Log.d("COming", "in in");
-                    user_protein = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
-                    Log.d("User Calories", (String.valueOf(calRef)));
-                }
-
-                @Override
-                public void onCancelled(FirebaseError firebaseError) {
-
-                }
-            });
-            Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
-            LoginActivity.this.startActivity(myIntent);
+        public User(String name, String phone, String gender, int age, String height, float weight, int stepgoal, int caloriegoal) {
+            this.name = name;
+            this.phone = phone;
+            this.gender = gender;
+            this.age = age;
+            this.height = height;
+            this.weight = weight;
+            this.stepgoal = stepgoal;
+            this.caloriegoal = caloriegoal;
         }
     }
 
-    @Override
-    public void onFirebaseLoggedOut() {
-        //Toast.makeText(getApplicationContext(), "LOGOUT SUCCESS", Toast.LENGTH_SHORT).show();
+    private class Steps {
+        public int totalsteps;
+
+        public Steps() {
+            // Default constructor required for calls to DataSnapshot.getValue(Steps.class)
+        }
+
+        public Steps(int totalsteps) {
+            this.totalsteps = totalsteps;
+        }
+    }
+
+    private class Calories {
+        public float totalcalories;
+        public float totalfat;
+        public float totalcarbs;
+        public float totalprotein;
+        public Calories() {
+            // Default constructor required for calls to DataSnapshot.getValue(Calories.class)
+        }
+
+        public Calories(float totalcalories, float totalfat, float totalcarbs, float totalprotein) {
+            this.totalcalories = totalcalories;
+            this.totalfat = totalfat;
+            this.totalcarbs = totalcarbs;
+            this.totalprotein = totalprotein;
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        // All providers are optional! Remove any you don't want.
-        setEnabledAuthProvider(AuthProviderType.PASSWORD);
-        setEnabledAuthProvider(AuthProviderType.GOOGLE);
-        setEnabledAuthProvider(AuthProviderType.FACEBOOK);
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        // Logs 'install' and 'app activate' App Events.
-        AppEventsLogger.activateApp(this);
+        for (String provider : AuthUI.SUPPORTED_PROVIDERS) {
+            Log.v(this.getClass().getName(), provider);
+        }
+
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                updateInfo();
+            }
+        };
+
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setIsSmartLockEnabled(false)
+                        .setAvailableProviders(providers)
+                        .setLogo(R.drawable.stayfit)
+                        .build(),
+                RC_SIGN_IN);
+    }
+
+
+    private void startUpTasks() {
+        SharedPreferences getPrefs = PreferenceManager
+                .getDefaultSharedPreferences(getBaseContext());
+
+        isAppLaunchedForFirstTime = getPrefs.getBoolean("firstStart", true);
+
+        //  If the activity has never started before...
+        if (isAppLaunchedForFirstTime) {
+            //  Launch app intro
+            Intent i = new Intent(LoginActivity.this, AppIntroActivity.class);
+            startActivity(i);
+
+            SharedPreferences.Editor e = getPrefs.edit();
+            e.putBoolean("firstStart", false); // Edit preference to make it false because we don't want this to run again
+            e.apply();
+
+            initializeUserInfo();
+        } else {
+            getUserInfo();
+            Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+            LoginActivity.this.startActivity(myIntent);
+        }
+    }
+
+    private void initializeUserInfo() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userId = user.getUid();
+
+        User newUser = new User("", "", "", 0, "", 0, 0, 0);
+        mDatabase.child("Users").child(userId).setValue(newUser);
+
+        Steps steps = new Steps(0);
+        mDatabase.child("Steps").child(userId).setValue(steps);
+
+        Calories calories = new Calories(0, 0, 0, 0);
+        mDatabase.child("Calories").child(userId).setValue(calories);
+    }
+
+    private DatabaseReference getUsersRef(String ref) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userId = user.getUid();
+        return mDatabase.child("Users").child(userId).child(ref);
+    }
+
+    private DatabaseReference getCaloriesRef(String ref) {
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userId = user.getUid();
+        return mDatabase.child("Calories").child(userId).child(ref);
+    }
+
+    private void getUserInfo() {
+        getUsersRef("stepgoal").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mSeries1 = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+        getUsersRef("caloriegoal").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mSeries2 = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+        getUsersRef("name").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                USER_NAME = (String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+        getCaloriesRef("totalcalories").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                calRef = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+        getCaloriesRef("totalfat").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user_fat = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+        getCaloriesRef("totalcarbs").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user_carbs = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+
+        getCaloriesRef("totalprotein").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                user_protein = Float.parseFloat(String.valueOf(dataSnapshot.getValue()));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        });
+    }
+
+    private void updateInfo() {
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) {
+            USER_ID = user.getUid();
+            USER_EMAIL = user.getEmail();
+            // Picasso.with(ActivityFUIAuth.this).load(user.getPhotoUrl()).into(imgProfile);
+        }
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+            if (resultCode == Activity.RESULT_OK) {
+                Log.d(this.getClass().getName(), "This user signed in with " + response.getProviderType());
+                startUpTasks();
+                updateInfo();
+            } else {
+                // Sign in failed
+                if (response == null) {
+                    // User pressed back button
+                    Toast.makeText(this, "Signin cancelled", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-        // Logs 'app deactivate' App Event.
-        AppEventsLogger.deactivateApp(this);
-    }
+                if (response.getError().getErrorCode() == ErrorCodes.NO_NETWORK) {
+                    Toast.makeText(this, "Check network connection and try again", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-    // Validate email address for new accounts.
-    private boolean isEmailValid(String email) {
-        boolean isGoodEmail = (email != null && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches());
-        if (!isGoodEmail) {
-            userNameET.setError(EMAIL_INVALID + email);
-            return false;
+                Toast.makeText(this, "Unexpected Error, we are trying to resolve the issue. Please check back soon", Toast.LENGTH_LONG).show();
+                Log.e(TAG, "Sign-in error: ", response.getError());
+            }
         }
-        return true;
-    }
-
-    // create a new user in Firebase
-    public void createUser() {
-        if(userNameET.getText() == null ||  !isEmailValid(userNameET.getText().toString())) {
-            return;
-        }
-        firebaseRef.createUser(userNameET.getText().toString(), passwordET.getText().toString(),
-                new Firebase.ValueResultHandler<Map<String, Object>>() {
-                    @Override
-                    public void onSuccess(Map<String, Object> result) {
-                        Snackbar snackbar = Snackbar.make(userNameET, USER_CREATION_SUCCESS, Snackbar.LENGTH_SHORT);
-                        snackbar.show();
-
-                        // Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users");
-                        // ref.child().setValue("3157447509");
-                        // Firebase cref = ref.child("Age");
-
-                    }
-                    @Override
-                    public void onError(FirebaseError firebaseError) {
-                        Snackbar snackbar = Snackbar.make(userNameET, USER_CREATION_ERROR, Snackbar.LENGTH_SHORT);
-                        snackbar.show();
-                    }
-                });
     }
 }

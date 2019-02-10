@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.maddi.fitness">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,12 +37,24 @@
         </activity>
         <activity android:name="com.example.maddi.fitness.ChartActivity"
             android:label="Rahul Data"></activity>
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
+        <!--<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>-->
+        <!--<activity android:name="com.facebook.FacebookActivity"-->
+            <!--android:configChanges=-->
+                <!--"keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
+            <!--android:label="@string/app_name" />-->
+        <meta-data
+            tools:replace="android:value"
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <!--<activity-->
+            <!--android:name="com.facebook.FacebookActivity"-->
+            <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
+            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
+            <!--android:label="@string/app_name"-->
+            <!--android:launchMode="singleInstance"-->
+            <!--android:screenOrientation="portrait"/>-->
         <activity android:name="com.example.maddi.fitness.OverviewActivity"
             android:label="Overview">
 

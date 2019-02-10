@@ -2,7 +2,7 @@ package com.example.maddi.fitness;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by maddi on 3/1/2016.
  */
-public class ChartActivity extends ActionBarActivity {
+public class ChartActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

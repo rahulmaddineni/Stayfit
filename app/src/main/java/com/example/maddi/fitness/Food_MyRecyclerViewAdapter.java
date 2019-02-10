@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
+//import com.firebase.client.Firebase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +33,7 @@ public class Food_MyRecyclerViewAdapter extends RecyclerView.Adapter<Food_MyRecy
     public static float totalprotein = 0f;
     public static int count = 0;
 
-    Firebase cref = new Firebase("https://healthkit.firebaseio.com/Calories/"+LoginActivity.USER_ID);
+//    Firebase cref = new Firebase("https://healthkit.firebaseio.com/Calories/"+LoginActivity.USER_ID);
 
     // Constructor
     public Food_MyRecyclerViewAdapter(Context myContext, List<Map<String, ?>> myDataset) {
@@ -83,10 +83,10 @@ public class Food_MyRecyclerViewAdapter extends RecyclerView.Adapter<Food_MyRecy
                     totalprotein = totalprotein + (Float.parseFloat((String.valueOf(fooditem.get("iprotein")))));
                     Log.d("After Adding", String.valueOf(caloriecount) + String.valueOf(totalcarbs) + String.valueOf(totalfat) + String.valueOf(totalprotein));
                     Log.d("Adapter", (String.valueOf(Food_RecyclerFrag_Main.user_fat1)) + (String.valueOf(Food_RecyclerFrag_Main.user_carbs1)) + (String.valueOf(Food_RecyclerFrag_Main.user_protein1)) + (String.valueOf(Food_RecyclerFrag_Main.calRef1)));
-                    cref.child("totalcalories").setValue(caloriecount);
-                    cref.child("totalfat").setValue(totalfat);
-                    cref.child("totalcarbs").setValue(totalcarbs);
-                    cref.child("totalprotein").setValue(totalprotein);
+//                    cref.child("totalcalories").setValue(caloriecount);
+//                    cref.child("totalfat").setValue(totalfat);
+//                    cref.child("totalcarbs").setValue(totalcarbs);
+//                    cref.child("totalprotein").setValue(totalprotein);
 
                     if(count==1) {
                         String toast1 = String.valueOf(count)+"item added";

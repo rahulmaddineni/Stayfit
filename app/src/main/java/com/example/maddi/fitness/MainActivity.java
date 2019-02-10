@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.GravityCompat;
@@ -23,7 +24,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.hookedonplay.decoviewlib.DecoView;
 import com.hookedonplay.decoviewlib.charts.DecoDrawEffect;
 import com.hookedonplay.decoviewlib.charts.SeriesItem;
@@ -107,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements
         final float[] m = new float[1];
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         // Firebase Demo
-        Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users/"+LoginActivity.USER_ID);
+//        Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users/"+LoginActivity.USER_ID);
         //ref.child("PhoneNo").setValue("3157447509");
 
 
@@ -349,6 +352,11 @@ public class MainActivity extends AppCompatActivity implements
                 startActivity(intent);
                 break;
             case R.id.item4:
+                AuthUI.getInstance().signOut(this).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(MainActivity.this, "Signed out successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 Intent myIntent = new Intent(this, LoginActivity.class);
                 myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// clear back stack
                 startActivity(myIntent);

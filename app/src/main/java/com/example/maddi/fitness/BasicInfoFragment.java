@@ -15,7 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
+//import com.firebase.client.Firebase;
 
 /**
  * Created by sunny on 16-Apr-16.
@@ -44,7 +44,7 @@ public class BasicInfoFragment extends Fragment {
                              Bundle savedInstanceState) {
 
 
-        final Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users/"+LoginActivity.USER_ID);
+//        final Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users/"+LoginActivity.USER_ID);
         Log.d("UserID:",LoginActivity.USER_ID);
 
         final View rootView =  inflater.inflate(R.layout.fragment_basicinfo, container, false);
@@ -74,10 +74,10 @@ public class BasicInfoFragment extends Fragment {
                 position = myRadioGroup.indexOfChild(rootView.findViewById(checkedId));
                 if (position == 0) {
                     Log.d("Gender is ", "Male");
-                    ref.child("gender").setValue("Male");
+//                    ref.child("gender").setValue("Male");
                 } else {
                     Log.d("Gender is ", "Female");
-                    ref.child("gender").setValue("Female");
+//                    ref.child("gender").setValue("Female");
                 }
             }
         });
@@ -94,16 +94,16 @@ public class BasicInfoFragment extends Fragment {
                     return;
                 }
                 mListener.onFloatingButtonClicked();
-                Log.d("Name is ", nameET.getText().toString());
-                ref.child("name").setValue(nameET.getText().toString());
-                Log.d("Phone Number is ", phoneET.getText().toString());
-                ref.child("phone").setValue(phoneET.getText().toString());
-                Log.d("Age is ", ageET.getText().toString());
-                ref.child("age").setValue(ageET.getText().toString());
-                Log.d("User Height - cms is", heightET.getText().toString());
-                ref.child("height").setValue(heightET.getText().toString());
-                Log.d("User Weight is ", weightET.getText().toString());
-                ref.child("weight").setValue(weightET.getText().toString());
+//                Log.d("Name is ", nameET.getText().toString());
+//                ref.child("name").setValue(nameET.getText().toString());
+//                Log.d("Phone Number is ", phoneET.getText().toString());
+//                ref.child("phone").setValue(phoneET.getText().toString());
+//                Log.d("Age is ", ageET.getText().toString());
+//                ref.child("age").setValue(ageET.getText().toString());
+//                Log.d("User Height - cms is", heightET.getText().toString());
+//                ref.child("height").setValue(heightET.getText().toString());
+//                Log.d("User Weight is ", weightET.getText().toString());
+//                ref.child("weight").setValue(weightET.getText().toString());
 
             }
         });
@@ -116,16 +116,16 @@ public class BasicInfoFragment extends Fragment {
                     return;
                 }
                 mListener.onFloatingButtonClicked();
-                Log.d("Name is ", nameET.getText().toString());
-                ref.child("name").setValue(nameET.getText().toString());
-                Log.d("Phone Number is ", phoneET.getText().toString());
-                ref.child("phone").setValue(phoneET.getText().toString());
-                Log.d("Age is ", ageET.getText().toString());
-                ref.child("age").setValue(ageET.getText().toString());
-                Log.d("User Height - cms is", heightET.getText().toString());
-                ref.child("height").setValue(heightET.getText().toString());
-                Log.d("User Weight is ", weightET.getText().toString());
-                ref.child("weight").setValue(weightET.getText().toString());
+//                Log.d("Name is ", nameET.getText().toString());
+//                ref.child("name").setValue(nameET.getText().toString());
+//                Log.d("Phone Number is ", phoneET.getText().toString());
+//                ref.child("phone").setValue(phoneET.getText().toString());
+//                Log.d("Age is ", ageET.getText().toString());
+//                ref.child("age").setValue(ageET.getText().toString());
+//                Log.d("User Height - cms is", heightET.getText().toString());
+//                ref.child("height").setValue(heightET.getText().toString());
+//                Log.d("User Weight is ", weightET.getText().toString());
+//                ref.child("weight").setValue(weightET.getText().toString());
 
             }
         });
