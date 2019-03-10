@@ -25,4 +25,7 @@
     <color name="stayFitAccent">#002841</color>
     <color name="lightText">#c1beba</color>
     <color name="darkWash">#f2f1ef</color>
+    <color name="yellowXL">#fcbc21</color>
+    <color name="yellowS">#fedc89</color>
+    <color name="greyXL">#524e4a</color>
 </resources>

@@ -26,20 +26,8 @@ import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
+    public static final int RC_SIGN_IN = 0;
     private static final String TAG = "LoginActivity";
-
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private boolean isAppLaunchedForFirstTime;
-
-    // Authentication providers
-    List<AuthUI.IdpConfig> providers = Arrays.asList(
-            new AuthUI.IdpConfig.EmailBuilder().build(),
-            new AuthUI.IdpConfig.PhoneBuilder().build(),
-            new AuthUI.IdpConfig.GoogleBuilder().build(),
-            new AuthUI.IdpConfig.FacebookBuilder().build());
-
     public static String USER_ID = "";
     public static String USER_EMAIL = "";
     public static String USER_NAME = "";
@@ -49,63 +37,16 @@ public class LoginActivity extends AppCompatActivity {
     public static float user_fat = 0f;
     public static float user_carbs = 0f;
     public static float user_protein = 0f;
-    public static final int RC_SIGN_IN = 0;
-
-    private class User {
-        public String name;
-        public String phone;
-        public String gender;
-        public int age;
-        public String height;
-        public float weight;
-        public int stepgoal;
-        public int caloriegoal;
-
-
-        public User() {
-            // Default constructor required for calls to DataSnapshot.getValue(User.class)
-        }
-
-        public User(String name, String phone, String gender, int age, String height, float weight, int stepgoal, int caloriegoal) {
-            this.name = name;
-            this.phone = phone;
-            this.gender = gender;
-            this.age = age;
-            this.height = height;
-            this.weight = weight;
-            this.stepgoal = stepgoal;
-            this.caloriegoal = caloriegoal;
-        }
-    }
-
-    private class Steps {
-        public int totalsteps;
-
-        public Steps() {
-            // Default constructor required for calls to DataSnapshot.getValue(Steps.class)
-        }
-
-        public Steps(int totalsteps) {
-            this.totalsteps = totalsteps;
-        }
-    }
-
-    private class Calories {
-        public float totalcalories;
-        public float totalfat;
-        public float totalcarbs;
-        public float totalprotein;
-        public Calories() {
-            // Default constructor required for calls to DataSnapshot.getValue(Calories.class)
-        }
-
-        public Calories(float totalcalories, float totalfat, float totalcarbs, float totalprotein) {
-            this.totalcalories = totalcalories;
-            this.totalfat = totalfat;
-            this.totalcarbs = totalcarbs;
-            this.totalprotein = totalprotein;
-        }
-    }
+    // Authentication providers
+    List<AuthUI.IdpConfig> providers = Arrays.asList(
+            new AuthUI.IdpConfig.EmailBuilder().build(),
+            new AuthUI.IdpConfig.PhoneBuilder().build(),
+            new AuthUI.IdpConfig.GoogleBuilder().build(),
+            new AuthUI.IdpConfig.FacebookBuilder().build());
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+    private boolean isAppLaunchedForFirstTime;
 
     @Override
     protected void onStart() {
@@ -142,13 +83,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void startUpTasks() {
+        Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getBoolean("isFirstRun", true);
+
         SharedPreferences getPrefs = PreferenceManager
                 .getDefaultSharedPreferences(getBaseContext());
 
         isAppLaunchedForFirstTime = getPrefs.getBoolean("firstStart", true);
 
         //  If the activity has never started before...
-        if (isAppLaunchedForFirstTime) {
+        if (isFirstRun) {
             //  Launch app intro
             Intent i = new Intent(LoginActivity.this, AppIntroActivity.class);
             startActivity(i);
@@ -156,9 +100,12 @@ public class LoginActivity extends AppCompatActivity {
             SharedPreferences.Editor e = getPrefs.edit();
             e.putBoolean("firstStart", false); // Edit preference to make it false because we don't want this to run again
             e.apply();
+            getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                    .putBoolean("isFirstRun", false).commit();
 
             initializeUserInfo();
         } else {
+            initializeUserInfo();
             getUserInfo();
             Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(myIntent);
@@ -169,14 +116,18 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         String userId = user.getUid();
 
+        DatabaseReference usersRef = mDatabase.child("Users");
+        DatabaseReference stepsRef = mDatabase.child("Steps");
+        DatabaseReference caloriesRef = mDatabase.child("Calories");
+
         User newUser = new User("", "", "", 0, "", 0, 0, 0);
-        mDatabase.child("Users").child(userId).setValue(newUser);
+        usersRef.child(userId).setValue(newUser);
 
         Steps steps = new Steps(0);
-        mDatabase.child("Steps").child(userId).setValue(steps);
+        stepsRef.child(userId).setValue(steps);
 
         Calories calories = new Calories(0, 0, 0, 0);
-        mDatabase.child("Calories").child(userId).setValue(calories);
+        caloriesRef.child(userId).setValue(calories);
     }
 
     private DatabaseReference getUsersRef(String ref) {

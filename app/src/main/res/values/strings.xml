@@ -104,4 +104,10 @@
     <string name="tab3Text">Nike: Last</string>
     <string name="tab3VideoID">yMZB8X4CG6E</string>
 
+    <string name="nameInputHint">Name</string>
+    <string name="phoneInputHint">Phone</string>
+    <string name="ageInputHint">Age</string>
+    <string name="heightInputHint">Height (cm)</string>
+    <string name="weightInputHint">Weight (kg)</string>
+
 </resources>
