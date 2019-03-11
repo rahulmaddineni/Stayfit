@@ -23,7 +23,7 @@ public class MyUtility {
 
     // Download an image using HTTP Get Request
     public static Bitmap downloadImageusingHTTPGetRequest(String urlString) {
-        Bitmap image=null, line;
+        Bitmap image = null, line;
 
         try {
             URL url = new URL(urlString);
@@ -33,7 +33,7 @@ public class MyUtility {
                 image = getImagefromStream(stream);
             }
             httpConnection.disconnect();
-        }  catch (UnknownHostException e1) {
+        } catch (UnknownHostException e1) {
             Log.d("MyDebugMsg", "UnknownHostexception in sendHttpGetRequest");
             e1.printStackTrace();
         } catch (Exception ex) {
@@ -46,11 +46,11 @@ public class MyUtility {
     // Get an image from the input stream
     private static Bitmap getImagefromStream(InputStream stream) {
         Bitmap bitmap = null;
-        if(stream!=null) {
+        if (stream != null) {
             bitmap = BitmapFactory.decodeStream(stream);
             try {
                 stream.close();
-            }catch (IOException e1) {
+            } catch (IOException e1) {
                 Log.d("MyDebugMsg", "IOException in getImagefromStream()");
                 e1.printStackTrace();
             }
@@ -61,7 +61,7 @@ public class MyUtility {
 
     // Download JSON data (string) using HTTP Get Request
     public static String downloadJSONusingHTTPGetRequest(String urlString) {
-        String jsonString=null;
+        String jsonString = null;
 
         try {
             URL url = new URL(urlString);
@@ -71,7 +71,7 @@ public class MyUtility {
                 jsonString = getStringfromStream(stream);
             }
             httpConnection.disconnect();
-        }  catch (UnknownHostException e1) {
+        } catch (UnknownHostException e1) {
             Log.d("MyDebugMsg", "UnknownHostexception in downloadJSONusingHTTPGetRequest");
             e1.printStackTrace();
         } catch (Exception ex) {
@@ -82,8 +82,8 @@ public class MyUtility {
     }
 
     // Get a string from an input stream
-    private static String getStringfromStream(InputStream stream){
-        String line, jsonString=null;
+    private static String getStringfromStream(InputStream stream) {
+        String line, jsonString = null;
         if (stream != null) {
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
             StringBuilder out = new StringBuilder();
@@ -125,7 +125,7 @@ public class MyUtility {
 
 
     // Send json data via HTTP POST Request
-    public static void sendHttPostRequest(String urlString, JSONObject json){
+    public static void sendHttPostRequest(String urlString, JSONObject json) {
         HttpURLConnection httpConnection = null;
         try {
             URL url = new URL(urlString);
@@ -155,10 +155,6 @@ public class MyUtility {
 
         if (httpConnection != null) httpConnection.disconnect();
     }
-
-
-
-
 
 
 }

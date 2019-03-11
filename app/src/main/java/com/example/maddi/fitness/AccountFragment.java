@@ -1,6 +1,5 @@
 package com.example.maddi.fitness;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,30 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by sunny on 16-Apr-16.
- */
 public class AccountFragment extends Fragment {
 
-
-
-    public AccountFragment(){
+    public AccountFragment() {
         // Required empty public constructor
     }
 
-    public static AccountFragment newInstance(){
+    public static AccountFragment newInstance() {
         AccountFragment fragment = new AccountFragment();
         return fragment;
-    }
-
-    public interface OnChangeGoalListener{
-        public void onChangeGoalClicked();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView =  inflater.inflate(R.layout.account_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.account_fragment, container, false);
 
         ImageView changeGoalImg = (ImageView) rootView.findViewById(R.id.settingsIcon);
         TextView changeGoalsText = (TextView) rootView.findViewById(R.id.settingsText);
@@ -42,7 +32,7 @@ public class AccountFragment extends Fragment {
         try {
             mGoalListener = (OnChangeGoalListener) getContext();
             Log.d("mContext is ", getContext().toString());
-        }catch (ClassCastException ex){
+        } catch (ClassCastException ex) {
             throw new ClassCastException("The hosting activity of the fragment" +
                     "forgot to implement onFragmentInteractionListener");
         }
@@ -63,5 +53,8 @@ public class AccountFragment extends Fragment {
         return rootView;
     }
 
+    public interface OnChangeGoalListener {
+        public void onChangeGoalClicked();
+    }
 
 }

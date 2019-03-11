@@ -23,9 +23,10 @@ public class BasicInfoFragment extends Fragment {
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
 
-    public BasicInfoFragment(){ }
+    public BasicInfoFragment() {
+    }
 
-    public static BasicInfoFragment newInstance(){
+    public static BasicInfoFragment newInstance() {
         BasicInfoFragment fragment = new BasicInfoFragment();
         return fragment;
     }
@@ -45,20 +46,20 @@ public class BasicInfoFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView =  inflater.inflate(R.layout.fragment_basicinfo, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_basicinfo, container, false);
         final OnFloatingButtonClickListener mListener;
 
         try {
             mListener = (OnFloatingButtonClickListener) getContext();
             Log.d("mContext is ", getContext().toString());
-        }catch (ClassCastException ex){
+        } catch (ClassCastException ex) {
             throw new ClassCastException("The hosting activity of the fragment" +
                     "forgot to implement onFragmentInteractionListener");
         }
 
         final Button next = (Button) rootView.findViewById(R.id.nextbutton);
 
-        final FloatingActionButton fab1=(FloatingActionButton)getActivity().findViewById(R.id.next);
+        final FloatingActionButton fab1 = (FloatingActionButton) getActivity().findViewById(R.id.next);
         final EditText nameET = (EditText) rootView.findViewById(R.id.nameInput);
         final EditText phoneET = (EditText) rootView.findViewById(R.id.phoneInput);
         final EditText ageET = (EditText) rootView.findViewById(R.id.ageInput);
@@ -115,7 +116,7 @@ public class BasicInfoFragment extends Fragment {
             }
         });
 
-/* ---- BMI Calculation ---- */
+        /* ---- BMI Calculation ---- */
 //        final TextView bmicalc = (TextView) rootView.findViewById(R.id.bmi);
 //        final TextView bmires = (TextView) rootView.findViewById(R.id.bmiresult);
 //        ImageView bmiImage = (ImageView) rootView.findViewById(R.id.bmiimage);
@@ -152,7 +153,7 @@ public class BasicInfoFragment extends Fragment {
         return rootView;
     }
 
-    public interface OnFloatingButtonClickListener{
+    public interface OnFloatingButtonClickListener {
         public void onFloatingButtonClicked();
     }
 }

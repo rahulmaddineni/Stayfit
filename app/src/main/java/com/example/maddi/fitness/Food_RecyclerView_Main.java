@@ -37,8 +37,15 @@ public class Food_RecyclerView_Main extends Fragment {
 
     private static final String ARG_MOVIE = "R.id.mdf_main_replace";
     public static String voice_query = "";
-    private FloatingActionButton voice;
     private final int REQ_CODE_SPEECH_INPUT = 100;
+    FoodDataJson foodData;
+    private FloatingActionButton voice;
+    private RecyclerView mRecyclerView;
+    private Food_MyRecyclerViewAdapter mRecyclerViewAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    public Food_RecyclerView_Main() {
+        // Constructor
+    }
 
     public static Food_RecyclerView_Main newInstance() {
         Food_RecyclerView_Main fragment = new Food_RecyclerView_Main();
@@ -47,15 +54,6 @@ public class Food_RecyclerView_Main extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
-    public Food_RecyclerView_Main() {
-        // Constructor
-    }
-
-    private RecyclerView mRecyclerView;
-    private Food_MyRecyclerViewAdapter mRecyclerViewAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    FoodDataJson foodData;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,7 +97,7 @@ public class Food_RecyclerView_Main extends Fragment {
 
     /**
      * Showing google speech input dialog
-     * */
+     */
     private void promptSpeechInput() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -115,7 +113,7 @@ public class Food_RecyclerView_Main extends Fragment {
 
     /**
      * Receiving speech input
-     * */
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -127,7 +125,7 @@ public class Food_RecyclerView_Main extends Fragment {
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     voice_query = (result.get(0));
-                    Log.d("voice",voice_query);
+                    Log.d("voice", voice_query);
                 }
                 break;
             }
@@ -138,14 +136,14 @@ public class Food_RecyclerView_Main extends Fragment {
 
     // Search action menu
     @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater){
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_actionview, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
         final SearchView search = (SearchView) menu.findItem(R.id.action_search).getActionView();
-        if(search!= null){
+        if (search != null) {
             search.setIconifiedByDefault(true);
-            search.setQuery(voice_query,true);
+            search.setQuery(voice_query, true);
             // search.setQueryHint(voice_query);
             search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -177,23 +175,23 @@ public class Food_RecyclerView_Main extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 
     // Load Async Food Data from Nutrionix.com
-    private class MyDownloadJsonAsyncTask extends AsyncTask<String, Void, FoodDataJson>{
+    private class MyDownloadJsonAsyncTask extends AsyncTask<String, Void, FoodDataJson> {
         private final WeakReference<Food_MyRecyclerViewAdapter> adapterReference;
 
-        public MyDownloadJsonAsyncTask(Food_MyRecyclerViewAdapter adapter){
+        public MyDownloadJsonAsyncTask(Food_MyRecyclerViewAdapter adapter) {
             adapterReference = new WeakReference<Food_MyRecyclerViewAdapter>(adapter);
         }
 
         @Override
         protected FoodDataJson doInBackground(String... urls) {
             FoodDataJson threadMovieData = new FoodDataJson();
-            for (String url:urls){
+            for (String url : urls) {
                 try {
                     threadMovieData.downloadFoodDataJson(url);
                 } catch (JSONException e) {

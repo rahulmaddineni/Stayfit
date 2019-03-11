@@ -20,7 +20,6 @@ public class AppIntroActivity extends AppIntro {
         // Instead of fragments, you can also use our default slide
         // Just set a title, description, background and image. AppIntro will do the rest.
         addSlide(AppIntroFragment.newInstance("Eye Catching Visuals", "Your Daily Statistics", R.drawable.appintro1, getResources().getColor(R.color.appintro1)));
-        //addSlide(AppIntroFragment.newInstance("Who is the best?", "Compare with Friends", R.drawable.appintro5, getResources().getColor(R.color.appintro2)));
         addSlide(AppIntroFragment.newInstance("Invite Friends", "Share A Run with them", R.drawable.appintro3, getResources().getColor(R.color.appintro3)));
         addSlide(AppIntroFragment.newInstance("", "Get Started", R.drawable.appintro4, getResources().getColor(R.color.appintro4)));
 
@@ -34,7 +33,6 @@ public class AppIntroActivity extends AppIntro {
         setProgressButtonEnabled(true);
 
         // Turn vibration on and set intensity.
-        // NOTE: you will probably need to ask VIBRATE permisssion in Manifest.
         setVibrate(true);
         setVibrateIntensity(30);
     }

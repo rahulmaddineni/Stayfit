@@ -16,8 +16,8 @@ import java.util.Locale;
 
 public class GeocodeAddressIntentService extends IntentService {
 
-    protected ResultReceiver resultReceiver;
     private static final String TAG = "GEO_ADDY_SERVICE";
+    protected ResultReceiver resultReceiver;
 
     public GeocodeAddressIntentService() {
         super("GeocodeAddressIntentService");
@@ -33,7 +33,7 @@ public class GeocodeAddressIntentService extends IntentService {
         int fetchType = intent.getIntExtra(Constants.FETCH_TYPE_EXTRA, 0);
         Log.e(TAG, "fetchType == " + fetchType);
 
-        if(fetchType == Constants.USE_ADDRESS_NAME) {
+        if (fetchType == Constants.USE_ADDRESS_NAME) {
             String name = intent.getStringExtra(Constants.LOCATION_NAME_DATA_EXTRA);
             try {
                 addresses = geocoder.getFromLocationName(name, 1);
@@ -41,8 +41,7 @@ public class GeocodeAddressIntentService extends IntentService {
                 errorMessage = "Service not available";
                 Log.e(TAG, errorMessage, e);
             }
-        }
-        else if(fetchType == Constants.USE_ADDRESS_LOCATION) {
+        } else if (fetchType == Constants.USE_ADDRESS_LOCATION) {
             double latitude = intent.getDoubleExtra(Constants.LOCATION_LATITUDE_DATA_EXTRA, 0);
             double longitude = intent.getDoubleExtra(Constants.LOCATION_LONGITUDE_DATA_EXTRA, 0);
 
@@ -57,23 +56,22 @@ public class GeocodeAddressIntentService extends IntentService {
                         "Latitude = " + latitude + ", Longitude = " +
                         longitude, illegalArgumentException);
             }
-        }
-        else {
+        } else {
             errorMessage = "Unknown Type";
             Log.e(TAG, errorMessage);
         }
 
         resultReceiver = intent.getParcelableExtra(Constants.RECEIVER);
-        if (addresses == null || addresses.size()  == 0) {
+        if (addresses == null || addresses.size() == 0) {
             if (errorMessage.isEmpty()) {
                 errorMessage = "Not Found";
                 Log.e(TAG, errorMessage);
             }
             deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage, null);
         } else {
-            for(Address address : addresses) {
+            for (Address address : addresses) {
                 String outputAddress = "";
-                for(int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                     outputAddress += " --- " + address.getAddressLine(i);
                 }
                 Log.e(TAG, outputAddress);
@@ -81,7 +79,7 @@ public class GeocodeAddressIntentService extends IntentService {
             Address address = addresses.get(0);
             ArrayList<String> addressFragments = new ArrayList<>();
 
-            for(int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+            for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
                 addressFragments.add(address.getAddressLine(i));
             }
             Log.i(TAG, "Address Found");

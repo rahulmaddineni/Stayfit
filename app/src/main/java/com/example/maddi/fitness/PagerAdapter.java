@@ -4,21 +4,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-/**
- * Created by sunny on 24-Apr-16.
- */
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     int numTabs;
 
-    public PagerAdapter(FragmentManager fm, int tabs){
+    public PagerAdapter(FragmentManager fm, int tabs) {
         super(fm);
         this.numTabs = tabs;
     }
 
     @Override
-    public Fragment getItem(int position){
-        switch (position){
+    public Fragment getItem(int position) {
+        switch (position) {
             case 0:
                 Fragment1 tab1 = new Fragment1();
                 return tab1;
@@ -34,7 +31,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     }
 
     @Override
-    public int getCount(){
+    public int getCount() {
         return numTabs;
     }
 

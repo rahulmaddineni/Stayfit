@@ -12,17 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-/**
- * Created by sunny on 16-Apr-16.
- */
 public class AccountActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener, AccountFragment.OnChangeGoalListener{
+        NavigationView.OnNavigationItemSelectedListener, AccountFragment.OnChangeGoalListener {
 
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_activity);
 
@@ -47,12 +44,12 @@ public class AccountActivity extends AppCompatActivity implements
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override
-                    public void onDrawerClosed(View drawerView){
+                    public void onDrawerClosed(View drawerView) {
                         super.onDrawerClosed(drawerView);
                     }
 
                     @Override
-                    public void onDrawerOpened(View drawerView){
+                    public void onDrawerOpened(View drawerView) {
                         super.onDrawerOpened(drawerView);
                     }
                 };
@@ -64,11 +61,11 @@ public class AccountActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item){
+    public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.item1:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -94,7 +91,7 @@ public class AccountActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onChangeGoalClicked(){
+    public void onChangeGoalClicked() {
         Intent myIntent = new Intent(this, SetGoalActivity.class);
         startActivity(myIntent);
     }

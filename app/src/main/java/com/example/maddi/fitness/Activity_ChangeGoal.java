@@ -14,17 +14,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by sunny on 24-Apr-16.
- */
 public class Activity_ChangeGoal extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_goal_settings);
 
@@ -54,12 +51,12 @@ public class Activity_ChangeGoal extends AppCompatActivity implements
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override
-                    public void onDrawerClosed(View drawerView){
+                    public void onDrawerClosed(View drawerView) {
                         super.onDrawerClosed(drawerView);
                     }
 
                     @Override
-                    public void onDrawerOpened(View drawerView){
+                    public void onDrawerOpened(View drawerView) {
                         super.onDrawerOpened(drawerView);
                     }
                 };
@@ -68,15 +65,14 @@ public class Activity_ChangeGoal extends AppCompatActivity implements
 
         actionBarDrawerToggle.syncState();
 
-
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item){
+    public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.item1:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);

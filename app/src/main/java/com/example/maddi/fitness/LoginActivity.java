@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    private boolean isAppLaunchedForFirstTime;
 
     @Override
     protected void onStart() {
@@ -86,26 +85,17 @@ public class LoginActivity extends AppCompatActivity {
         Boolean isFirstRun = getSharedPreferences("PREFERENCE", MODE_PRIVATE)
                 .getBoolean("isFirstRun", true);
 
-        SharedPreferences getPrefs = PreferenceManager
-                .getDefaultSharedPreferences(getBaseContext());
-
-        isAppLaunchedForFirstTime = getPrefs.getBoolean("firstStart", true);
-
         //  If the activity has never started before...
         if (isFirstRun) {
             //  Launch app intro
             Intent i = new Intent(LoginActivity.this, AppIntroActivity.class);
             startActivity(i);
 
-            SharedPreferences.Editor e = getPrefs.edit();
-            e.putBoolean("firstStart", false); // Edit preference to make it false because we don't want this to run again
-            e.apply();
             getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
                     .putBoolean("isFirstRun", false).commit();
 
             initializeUserInfo();
         } else {
-            initializeUserInfo();
             getUserInfo();
             Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
             LoginActivity.this.startActivity(myIntent);

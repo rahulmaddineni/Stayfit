@@ -23,7 +23,6 @@ public class ChartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chart);
         BarChart chart = (BarChart) findViewById(R.id.chart);
 
-        //BarData data = new BarData(getXAxisValues(),getDataSet());
         BarData data = new BarData();
         chart.setData(data);
         chart.setDescription("My Chart");

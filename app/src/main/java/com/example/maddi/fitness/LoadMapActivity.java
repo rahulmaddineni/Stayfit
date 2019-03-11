@@ -20,8 +20,8 @@ import android.widget.Toast;
  */
 public class LoadMapActivity extends AppCompatActivity {
 
-    private final String DEBUG_TAG = "SMS Manager";
     public final int PICK_CONTACT = 2015;
+    private final String DEBUG_TAG = "SMS Manager";
     public String phoneno = "";
 
     @Override
@@ -81,16 +81,14 @@ public class LoadMapActivity extends AppCompatActivity {
         //String lng = getIntent().getExtras().getString("Longitude");
         // Replace latitude and longitude values
         Address msgaddress = AskLocationActivity.address1;
-        String message = "Shall we run together, Location:"+ "http://maps.google.com/?q="+msgaddress.getLatitude()+","+msgaddress.getLongitude();
+        String message = "Shall we run together, Location:" + "http://maps.google.com/?q=" + msgaddress.getLatitude() + "," + msgaddress.getLongitude();
 
-        Log.d("Message",message);
+        Log.d("Message", message);
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, message, null, null);
             Toast.makeText(getApplicationContext(), "Invitation sent.", Toast.LENGTH_LONG).show();
-        }
-
-        catch (Exception e) {
+        } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "SMS faild, please try again.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }

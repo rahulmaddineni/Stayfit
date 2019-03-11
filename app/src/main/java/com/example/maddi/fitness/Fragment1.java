@@ -13,39 +13,35 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
-/**
- * Created by sunny on 24-Apr-16.
- */
-public class Fragment1 extends Fragment implements YouTubePlayer.OnInitializedListener{
+public class Fragment1 extends Fragment implements YouTubePlayer.OnInitializedListener {
 
-    private int RECOVERY_DIALOG_REQUEST = 1;
     YouTubePlayer mPlayer1;
     String mVideoId1;
     YouTubePlayerSupportFragment playerFragment1;
+    private int RECOVERY_DIALOG_REQUEST = 1;
 
 
-    public static Fragment1 newInstance(){
+    public Fragment1() {
+    }
+
+    public static Fragment1 newInstance() {
         Fragment1 fragment = new Fragment1();
         Bundle args = new Bundle();
 
         return fragment;
     }
-    public Fragment1(){
-    }
+
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
         View rootView1;
 
-
-        //getActivity().setTitle("Movie Show");
-
-        rootView1=inflater.inflate(R.layout.tab_fragment_1, container, false);
+        rootView1 = inflater.inflate(R.layout.tab_fragment_1, container, false);
         TextView title1 = (TextView) rootView1.findViewById(R.id.title1);
         title1.setVisibility(View.VISIBLE);
 
@@ -55,7 +51,6 @@ public class Fragment1 extends Fragment implements YouTubePlayer.OnInitializedLi
 
         playerFragment1 = (YouTubePlayerSupportFragment) getChildFragmentManager().findFragmentById(R.id.moviePlayer1);
         playerFragment1.setUserVisibleHint(true);
-        //playerFragment1.initialize(getString(R.string.google_maps_key), this);
 
         return rootView1;
     }
@@ -75,7 +70,7 @@ public class Fragment1 extends Fragment implements YouTubePlayer.OnInitializedLi
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer1, boolean restored) {
 
-        mPlayer1=youTubePlayer1;
+        mPlayer1 = youTubePlayer1;
 
         //Here we can set some flags on the player
 
@@ -94,7 +89,6 @@ public class Fragment1 extends Fragment implements YouTubePlayer.OnInitializedLi
         mPlayer1.addFullscreenControlFlag(YouTubePlayer.FULLSCREEN_FLAG_CONTROL_SYSTEM_UI);
 
 
-
         if (mVideoId1 != null) {
             if (restored) {
                 mPlayer1.play();
@@ -104,6 +98,7 @@ public class Fragment1 extends Fragment implements YouTubePlayer.OnInitializedLi
         }
 
     }
+
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         if (youTubeInitializationResult.isUserRecoverableError()) {

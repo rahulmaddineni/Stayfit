@@ -8,12 +8,7 @@ import android.util.Log;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.TranslateAnimation;
 
-//import com.google.android.gms.fitness.data.DataSource;
-//import com.google.android.gms.fitness.data.DataType;
-//import com.google.android.gms.fitness.request.DataReadRequest;
 import com.natasa.progressviews.CircleProgressBar;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by maddi on 4/20/2016.
@@ -54,18 +49,15 @@ public class FoodSummaryActivity extends AppCompatActivity {
         translation1.setInterpolator(new BounceInterpolator());
 
         // Fats Progress Bar
-        if(food_fat>0) {
+        if (food_fat > 0) {
             fats.setProgress((100 * (food_fat)) / max_fat);
-        }
-        else
-            fats.setProgress((100*(LoginActivity.user_fat))/max_fat);
+        } else
+            fats.setProgress((100 * (LoginActivity.user_fat)) / max_fat);
         fats.setWidthProgressBackground(25);
         fats.setWidthProgressBarLine(25);
-        if(food_fat>0)
-        {
+        if (food_fat > 0) {
             fats.setText(String.valueOf(food_fat));
-        }
-        else {
+        } else {
             fats.setText(String.valueOf(LoginActivity.user_fat));
         }
         fats.setTextSize(35);
@@ -74,19 +66,16 @@ public class FoodSummaryActivity extends AppCompatActivity {
         fats.startAnimation(translation);
 
         // Carbs Progress Bar
-        if(food_carbs > 0) {
+        if (food_carbs > 0) {
             carbs.setProgress((100 * (food_carbs)) / max_carbs);
-        }
-        else
-            carbs.setProgress((100*(LoginActivity.user_carbs))/max_carbs);
+        } else
+            carbs.setProgress((100 * (LoginActivity.user_carbs)) / max_carbs);
         carbs.startAnimation(translation);
         carbs.setWidthProgressBackground(25);
         carbs.setWidthProgressBarLine(25);
-        if(food_carbs > 0)
-        {
+        if (food_carbs > 0) {
             carbs.setText(String.valueOf(food_carbs));
-        }
-        else {
+        } else {
             carbs.setText(String.valueOf(LoginActivity.user_carbs));
         }
         carbs.setTextSize(35);
@@ -94,18 +83,15 @@ public class FoodSummaryActivity extends AppCompatActivity {
         carbs.setRoundEdgeProgress(true);
 
         // protein Progress Bar
-        if(food_protein>0) {
+        if (food_protein > 0) {
             protein.setProgress((100 * (food_protein)) / max_protein);
-        }
-        else
-            protein.setProgress((100*(LoginActivity.user_protein))/max_protein);
+        } else
+            protein.setProgress((100 * (LoginActivity.user_protein)) / max_protein);
         protein.setWidthProgressBackground(25);
         protein.setWidthProgressBarLine(25);
-        if(food_protein > 0)
-        {
+        if (food_protein > 0) {
             protein.setText(String.valueOf(food_protein));
-        }
-        else {
+        } else {
             protein.setText(String.valueOf(LoginActivity.user_protein));
         }
         protein.setTextSize(35);
@@ -114,6 +100,7 @@ public class FoodSummaryActivity extends AppCompatActivity {
         protein.setAnimation(translation1);
 
     }
+
     private int getDisplayHeight() {
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);

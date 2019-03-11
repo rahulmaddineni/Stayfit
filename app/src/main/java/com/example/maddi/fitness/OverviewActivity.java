@@ -24,7 +24,7 @@ import com.natasa.progressviews.utils.OnProgressViewListener;
  * Created by maddi on 4/20/2016.
  */
 public class OverviewActivity extends AppCompatActivity implements
-        NavigationView.OnNavigationItemSelectedListener{
+        NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
@@ -33,7 +33,6 @@ public class OverviewActivity extends AppCompatActivity implements
     float food_calories;
 
     protected void onCreate(Bundle savedInstanceState) {
-       // Toast.makeText(OverviewActivity.this,String.valueOf(MainActivity.mSeriesMax), Toast.LENGTH_SHORT).show();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
@@ -54,12 +53,12 @@ public class OverviewActivity extends AppCompatActivity implements
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override
-                    public void onDrawerClosed(View drawerView){
+                    public void onDrawerClosed(View drawerView) {
                         super.onDrawerClosed(drawerView);
                     }
 
                     @Override
-                    public void onDrawerOpened(View drawerView){
+                    public void onDrawerOpened(View drawerView) {
                         super.onDrawerOpened(drawerView);
                     }
                 };
@@ -72,14 +71,12 @@ public class OverviewActivity extends AppCompatActivity implements
         Log.d("Calories for Overview", String.valueOf(Food_RecyclerFrag_Main.calRef1));
         // Setting Steps and Calories
         stepMax = SetGoalActivity.mSeries;
-        if(stepMax == 0)
-        {
+        if (stepMax == 0) {
             stepMax = LoginActivity.mSeries1;
         }
         calorieMax = SetGoalActivity.mSeries1;
-        Log.d("SetGoal mseries",String.valueOf(SetGoalActivity.mSeries));
-        if(calorieMax == 0)
-        {
+        Log.d("SetGoal mseries", String.valueOf(SetGoalActivity.mSeries));
+        if (calorieMax == 0) {
             calorieMax = LoginActivity.mSeries2;
         }
         final CircleProgressBar steps = (CircleProgressBar) findViewById(R.id.step_progress);
@@ -101,22 +98,21 @@ public class OverviewActivity extends AppCompatActivity implements
         translation1.setInterpolator(new BounceInterpolator());
 
         // Steps Progress Bar
-        steps.setProgress((100*(MainActivity.evsteps))/stepMax);
+        steps.setProgress((100 * (MainActivity.evsteps)) / stepMax);
         steps.setWidth(280);
         steps.setWidthProgressBackground(25);
         steps.setWidthProgressBarLine(20);
-        steps.setText(MainActivity.evsteps+"/ " + stepMax);
+        steps.setText(MainActivity.evsteps + "/ " + stepMax);
         steps.setTextSize(40);
         steps.setBackgroundColor(Color.LTGRAY);
         steps.setRoundEdgeProgress(true);
         steps.startAnimation(translation);
         //steps.setProgressIndeterminateAnimation(1000);
         // Food Progress Bar
-        if(food_calories>0) {
+        if (food_calories > 0) {
             food.setProgress((100 * (food_calories)) / calorieMax);
             food.setText(food_calories + "/ " + calorieMax);
-        }
-        else {
+        } else {
             food.setProgress((100 * (LoginActivity.calRef)) / calorieMax);
             food.setText(LoginActivity.calRef + "/ " + calorieMax);
         }
@@ -132,6 +128,7 @@ public class OverviewActivity extends AppCompatActivity implements
         // Listeners
         steps.setOnProgressViewListener(new OnProgressViewListener() {
             float progress = 0;
+
             @Override
             public void onFinish() {
                 //do something on progress finish
@@ -146,15 +143,13 @@ public class OverviewActivity extends AppCompatActivity implements
             }
 
             @Override
-            public void setProgress(float prog)
-            {
+            public void setProgress(float prog) {
                 progress = prog;
             }
 
             @Override
-            public int getprogress()
-            {
-                return (int)progress;
+            public int getprogress() {
+                return (int) progress;
             }
         });
 
@@ -290,11 +285,11 @@ public class OverviewActivity extends AppCompatActivity implements
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item){
+    public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.item1:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -318,7 +313,6 @@ public class OverviewActivity extends AppCompatActivity implements
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
 }

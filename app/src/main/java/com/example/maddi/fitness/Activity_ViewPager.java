@@ -10,10 +10,6 @@ import android.view.View;
 
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 
-
-/**
- * Created by sunny on 24-Apr-16.
- */
 public class Activity_ViewPager extends AppCompatActivity {
 
     ViewPager viewPager;
@@ -21,13 +17,13 @@ public class Activity_ViewPager extends AppCompatActivity {
     private ActionBar myActionBar;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_viewpager);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        myActionBar=getSupportActionBar();
+        myActionBar = getSupportActionBar();
         myActionBar.setDisplayHomeAsUpEnabled(true);
 
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);

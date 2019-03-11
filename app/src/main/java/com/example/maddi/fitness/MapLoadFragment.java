@@ -107,7 +107,7 @@ public class MapLoadFragment extends Fragment implements
             // for ActivityCompat#requestPermissions for more details.
             ActivityCompat.requestPermissions(
                     getActivity(),
-                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.LOCATION_HARDWARE,Manifest.permission_group.LOCATION},
+                    new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.LOCATION_HARDWARE, Manifest.permission_group.LOCATION},
                     PERMISSION_LOCATION_REQUEST_CODE);
             return;
         }
@@ -145,8 +145,8 @@ public class MapLoadFragment extends Fragment implements
     }
 
     /*
-    * set location request: frequency, priority
-    * */
+     * set location request: frequency, priority
+     * */
     private LocationRequest createLocationRequest() {
         LocationRequest mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(2000);
@@ -162,7 +162,7 @@ public class MapLoadFragment extends Fragment implements
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(AskLocationActivity.address1.getLatitude(), AskLocationActivity.address1.getLongitude());
         mMap.addMarker(new MarkerOptions().position(sydney).title(AskLocationActivity.place1));
-       // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         //move camera when location changed
         LatLng latLng_Now = new LatLng(location.getLatitude(), location.getLongitude());
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -199,7 +199,7 @@ public class MapLoadFragment extends Fragment implements
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-       // mMap.setMyLocationEnabled(true);
+        // mMap.setMyLocationEnabled(true);
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override

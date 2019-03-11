@@ -16,30 +16,33 @@ import java.util.Map;
  * Created by maddi on 3/29/2016.
  */
 public class FoodDataJson {
-    List<Map<String,?>> foodList;
+    List<Map<String, ?>> foodList;
     public TextView t;
+
     public List<Map<String, ?>> getMoviesList() {
         return foodList;
     }
-    public int getSize(){
+
+    public int getSize() {
         return foodList.size();
     }
-    public HashMap getItem(int i){
-        if (i >=0 && i < foodList.size()){
+
+    public HashMap getItem(int i) {
+        if (i >= 0 && i < foodList.size()) {
             return (HashMap) foodList.get(i);
         } else
             return null;
     }
 
     public FoodDataJson() {
-        foodList = new ArrayList<Map<String,?>>();
+        foodList = new ArrayList<Map<String, ?>>();
     }
-    public void removeItem(int i)
-    {
+
+    public void removeItem(int i) {
         foodList.remove(i);
     }
-    public void addItem(int position, HashMap clone)
-    {
+
+    public void addItem(int position, HashMap clone) {
         foodList.add(position, clone);
     }
 
@@ -48,11 +51,10 @@ public class FoodDataJson {
 
         String foodArray = MyUtility.downloadJSONusingHTTPGetRequest(json_url);
         foodArray = foodArray.toString();
-        //foodArray = '{'+foodArray;
         longInfo(foodArray);
         Log.d("FoodArray", foodArray);
 
-        if (foodArray == null){
+        if (foodArray == null) {
             Log.d("MyDebugMsg", "Having trouble loading URL: " + json_url);
             return;
         }
@@ -61,12 +63,12 @@ public class FoodDataJson {
         try {
             JSONObject parentObject = new JSONObject(foodArray);
             JSONArray hitsJsonArray = parentObject.getJSONArray("hits");
-            Log.d("hits",hitsJsonArray.toString());
-            Log.d("hits length",String.valueOf(hitsJsonArray.length()));
+            Log.d("hits", hitsJsonArray.toString());
+            Log.d("hits length", String.valueOf(hitsJsonArray.length()));
             for (int i = 0; i < hitsJsonArray.length(); ++i) {
                 JSONObject f = hitsJsonArray.getJSONObject(i);
                 JSONObject fi = f.getJSONObject("fields");
-                Log.d("Hits array item:",fi.toString());
+                Log.d("Hits array item:", fi.toString());
                 {
                     String iid = fi.getString("item_id");
                     String iname = fi.getString("item_name");
@@ -77,16 +79,9 @@ public class FoodDataJson {
                     String ifat = fi.getString("nf_total_fat");
                     String iprotein = fi.getString("nf_protein");
                     String icarbs = fi.getString("nf_total_carbohydrate");
-                    foodList.add(createFood_brief(iid,iname,bid,bname,ical,idesc,ifat,iprotein,icarbs));
+                    foodList.add(createFood_brief(iid, iname, bid, bname, ical, idesc, ifat, iprotein, icarbs));
                 }
             }
-
-            //And then read attributes like
-            /*String iid = feildsObject.getString("item_id");
-            String iname = feildsObject.getString("item_name");
-            String bid = feildsObject.getString("brand_id");
-            String bname = feildsObject.getString("brand_name");
-            foodList.add(createFood_brief(iid,iname,bid,bname));*/
 
         } catch (JSONException e) {
             // TODO Auto-generated catch block
@@ -96,12 +91,12 @@ public class FoodDataJson {
 
     }
 
-    private static HashMap createFood_brief(String iid,String iname,String bid,String bname,String ical, String idesc, String ifat, String iprotein, String icarbs) {
+    private static HashMap createFood_brief(String iid, String iname, String bid, String bname, String ical, String idesc, String ifat, String iprotein, String icarbs) {
         HashMap fd = new HashMap();
 
         fd.put("iid", iid);
         fd.put("iname", iname);
-        fd.put("bid",bid);
+        fd.put("bid", bid);
         fd.put("bname", bname);
         fd.put("ical", ical);
         fd.put("idesc", idesc);
@@ -112,7 +107,7 @@ public class FoodDataJson {
     }
 
     public static void longInfo(String str) {
-        if(str.length() > 4000) {
+        if (str.length() > 4000) {
             Log.i("FoodArray1:", str.substring(0, 4000));
             longInfo(str.substring(4000));
         } else

@@ -35,11 +35,18 @@ import com.hookedonplay.decoviewlib.events.DecoEvent;
 public class MainActivity extends AppCompatActivity implements
         SensorEventListener, NavigationView.OnNavigationItemSelectedListener {
 
+    public static float evsteps;
+    public static int cont = 0;
+    /**
+     * Maximum value for each data series in the {@link DecoView}. This can be different for each
+     * data series, in this example we are applying the same all data series
+     */
+    public static float mSeriesMax = 0f;
+    boolean activityRunning;
     /**
      * DecoView animated arc based chart
      */
     private DecoView mDecoView;
-
     /**
      * Data series index used for controlling animation of {@link DecoView}. These are set when
      * the data series is created then used in {@link #createEvents} to specify what series to
@@ -49,22 +56,12 @@ public class MainActivity extends AppCompatActivity implements
     private int mSeries1Index;
     private int mSeries2Index;
     private int mSeries3Index;
-
     // Sensor data
     private TextView textView;
     private SensorManager msensorManager;
-    boolean activityRunning;
     private SensorManager sensorManager;
-    public static float evsteps;
-    public static int cont = 0;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-
-    /**
-     * Maximum value for each data series in the {@link DecoView}. This can be different for each
-     * data series, in this example we are applying the same all data series
-     */
-    public static float mSeriesMax = 0f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +83,12 @@ public class MainActivity extends AppCompatActivity implements
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override
-                    public void onDrawerClosed(View drawerView){
+                    public void onDrawerClosed(View drawerView) {
                         super.onDrawerClosed(drawerView);
                     }
 
                     @Override
-                    public void onDrawerOpened(View drawerView){
+                    public void onDrawerOpened(View drawerView) {
                         super.onDrawerOpened(drawerView);
                     }
                 };
@@ -101,18 +98,13 @@ public class MainActivity extends AppCompatActivity implements
         actionBarDrawerToggle.syncState();
 
         mSeriesMax = SetGoalActivity.mSeries;
-        Log.d("SetGoal mseries",String.valueOf(SetGoalActivity.mSeries));
-        if(mSeriesMax == 0)
-        {
+        Log.d("SetGoal mseries", String.valueOf(SetGoalActivity.mSeries));
+        if (mSeriesMax == 0) {
             mSeriesMax = LoginActivity.mSeries1;
         }
         final String cap1;
         final float[] m = new float[1];
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        // Firebase Demo
-//        Firebase ref = new Firebase("https://healthkit.firebaseio.com/Users/"+LoginActivity.USER_ID);
-        //ref.child("PhoneNo").setValue("3157447509");
-
 
         // Go to data image button
         final ImageView dn = (ImageView) findViewById(R.id.datanext);
@@ -121,12 +113,11 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 Intent intent1 = new Intent(MainActivity.this, Activity_ViewPager.class);
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     ActivityOptionsCompat options = ActivityOptionsCompat.
                             makeSceneTransitionAnimation(MainActivity.this, v, "testAnimation");
                     MainActivity.this.startActivity(intent1, options.toBundle());
-                }
-                else{
+                } else {
                     startActivity(intent1);
                 }
             }
@@ -154,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements
             });
         } */
         Log.d("mSeries out", (String.valueOf(mSeriesMax)));
-        if(mSeriesMax>0) {
+        if (mSeriesMax > 0) {
             Log.d("mSeries out in", (String.valueOf(mSeriesMax)));
             // Create required data series on the DecoView
             createBackSeries();
@@ -184,7 +175,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onPause() {
         super.onPause();
         activityRunning = false;
-        // if you unregister the last listener, the hardware will stop detecting step events
+//         if you unregister the last listener, the hardware will stop detecting step events
 //        sensorManager.unregisterListener(this);
     }
 
@@ -217,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements
                 .setInitialVisibility(false)
                 .build();
 
-        Log.d("mSeries Data1",(String.valueOf(mSeriesMax)));
+        Log.d("mSeries Data1", (String.valueOf(mSeriesMax)));
 
         final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
@@ -268,8 +259,7 @@ public class MainActivity extends AppCompatActivity implements
         cont++;
         mDecoView.executeReset();
 
-        if(cont == 1)
-        {
+        if (cont == 1) {
             resetText();
             mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_EXPLODE)
                     .setIndex(mSeries1Index)
@@ -295,16 +285,11 @@ public class MainActivity extends AppCompatActivity implements
                 .setDelay(100)
                 .build());
 
-/*        mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_OUT)
-                .setIndex(mSeries1Index)
-                .setDuration(2000)
-                .setDelay(1250)
-                .build());*/
-
         mDecoView.addEvent(new DecoEvent.Builder(evsteps)
                 .setIndex(mSeries1Index)
                 .setDelay(3250)
                 .build());
+
         mDecoView.addEvent(new DecoEvent.Builder(DecoDrawEffect.EffectType.EFFECT_SPIRAL_EXPLODE)
                 .setIndex(mSeries1Index)
                 .setDelay(20000)
@@ -323,22 +308,20 @@ public class MainActivity extends AppCompatActivity implements
                 })
                 .build());
 
-        // resetText();
     }
 
     private void resetText() {
-        //((TextView) findViewById(R.id.textActivity1)).setText("");
         ((TextView) findViewById(R.id.textPercentage)).setText("");
         ((TextView) findViewById(R.id.textRemaining)).setText("");
     }
 
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item){
+    public boolean onNavigationItemSelected(MenuItem item) {
 
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.item1:
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
@@ -367,7 +350,6 @@ public class MainActivity extends AppCompatActivity implements
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
 }

@@ -13,9 +13,6 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
-/**
- * Created by sunny on 24-Apr-16.
- */
 public class Fragment3 extends Fragment implements YouTubePlayer.OnInitializedListener {
 
     private int RECOVERY_DIALOG_REQUEST = 1;
@@ -24,27 +21,29 @@ public class Fragment3 extends Fragment implements YouTubePlayer.OnInitializedLi
 
 
     String mVideoId3;
-    public static Fragment3 newInstance(){
+
+    public static Fragment3 newInstance() {
         Fragment3 fragment = new Fragment3();
         Bundle args = new Bundle();
 
         return fragment;
     }
-    public Fragment3(){
+
+    public Fragment3() {
     }
+
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
         View rootView3;
 
-
         //getActivity().setTitle("Movie Show");
-        rootView3=inflater.inflate(R.layout.tab_fragment_3, container, false);
+        rootView3 = inflater.inflate(R.layout.tab_fragment_3, container, false);
         TextView title3 = (TextView) rootView3.findViewById(R.id.title3);
         title3.setVisibility(View.VISIBLE);
 
@@ -70,22 +69,10 @@ public class Fragment3 extends Fragment implements YouTubePlayer.OnInitializedLi
         }
     }
 
-/*    @Override
-    public void onPause(){
-        super.onPause();
-        if (playerFragment3 != null) {
-            getChildFragmentManager().beginTransaction()
-                    .remove(getChildFragmentManager().findFragmentById(R.id.frag3_container))
-                    .commit();
-
-        }
-        mPlayer3.release();
-    }*/
-
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer3, boolean restored) {
 
-        mPlayer3=youTubePlayer3;
+        mPlayer3 = youTubePlayer3;
 
         //Here we can set some flags on the player
 
@@ -113,6 +100,7 @@ public class Fragment3 extends Fragment implements YouTubePlayer.OnInitializedLi
         }
 
     }
+
     @Override
     public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
         if (youTubeInitializationResult.isUserRecoverableError()) {
