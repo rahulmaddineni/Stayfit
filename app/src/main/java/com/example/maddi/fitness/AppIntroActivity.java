@@ -13,8 +13,6 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
  */
 public class AppIntroActivity extends AppIntro {
 
-
-    // Please DO NOT override onCreate. Use init.
     @Override
     public void init(Bundle savedInstanceState) {
         // Instead of fragments, you can also use our default slide

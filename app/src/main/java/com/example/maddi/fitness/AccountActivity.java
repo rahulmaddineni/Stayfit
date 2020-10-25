@@ -23,24 +23,24 @@ public class AccountActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_activity);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, new AccountFragment())
                 .commit();
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View mHeaderView = navigationView.getHeaderView(0);
 
-        TextView nameId = (TextView) mHeaderView.findViewById(R.id.txt1);
+        TextView nameId = mHeaderView.findViewById(R.id.txt1);
         nameId.setText(LoginActivity.USER_NAME);
-        TextView emailId = (TextView) mHeaderView.findViewById(R.id.txt2);
+        TextView emailId = mHeaderView.findViewById(R.id.txt2);
         emailId.setText(LoginActivity.USER_EMAIL);
 
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout = findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override

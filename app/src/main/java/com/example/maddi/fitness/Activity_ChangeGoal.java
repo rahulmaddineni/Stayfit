@@ -25,10 +25,10 @@ public class Activity_ChangeGoal extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_goal_settings);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button saveButton = (Button) findViewById(R.id.saveButton);
+        Button saveButton = findViewById(R.id.saveButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Details saved", Toast.LENGTH_SHORT).show();
@@ -36,18 +36,18 @@ public class Activity_ChangeGoal extends AppCompatActivity implements
         });
 
 
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
         View mHeaderView = navigationView.getHeaderView(0);
 
-        TextView nameId = (TextView) mHeaderView.findViewById(R.id.txt1);
+        TextView nameId = mHeaderView.findViewById(R.id.txt1);
         nameId.setText(LoginActivity.USER_NAME);
-        TextView emailId = (TextView) mHeaderView.findViewById(R.id.txt2);
+        TextView emailId = mHeaderView.findViewById(R.id.txt2);
         emailId.setText(LoginActivity.USER_EMAIL);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout = findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override

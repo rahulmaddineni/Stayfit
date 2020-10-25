@@ -68,18 +68,18 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         View mHeaderView = navigationView.getHeaderView(0);
 
-        TextView nameId = (TextView) mHeaderView.findViewById(R.id.txt1);
+        TextView nameId = mHeaderView.findViewById(R.id.txt1);
         nameId.setText(LoginActivity.USER_NAME);
-        TextView emailId = (TextView) mHeaderView.findViewById(R.id.txt2);
+        TextView emailId = mHeaderView.findViewById(R.id.txt2);
         emailId.setText(LoginActivity.USER_EMAIL);
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout = findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
 
         // Go to data image button
-        final ImageView dn = (ImageView) findViewById(R.id.datanext);
+        final ImageView dn = findViewById(R.id.datanext);
         // Go to Chart Data page
         dn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        mDecoView = (DecoView) findViewById(R.id.dynamicArcView);
+        mDecoView = findViewById(R.id.dynamicArcView);
 
        /* if(mSeriesMax == 0)
         {
@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity implements
 
         Log.d("mSeries Data1", (String.valueOf(mSeriesMax)));
 
-        final TextView textPercentage = (TextView) findViewById(R.id.textPercentage);
+        final TextView textPercentage = findViewById(R.id.textPercentage);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements
         });
 
 
-        final TextView textToGo = (TextView) findViewById(R.id.textRemaining);
+        final TextView textToGo = findViewById(R.id.textRemaining);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {
@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        final TextView textActivity1 = (TextView) findViewById(R.id.textActivity1);
+        final TextView textActivity1 = findViewById(R.id.textActivity1);
         seriesItem.addArcSeriesItemListener(new SeriesItem.SeriesItemListener() {
             @Override
             public void onSeriesItemAnimationProgress(float percentComplete, float currentPosition) {

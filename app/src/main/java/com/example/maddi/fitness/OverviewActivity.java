@@ -36,20 +36,20 @@ public class OverviewActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
         View mHeaderView = navigationView.getHeaderView(0);
 
-        TextView nameId = (TextView) mHeaderView.findViewById(R.id.txt1);
+        TextView nameId = mHeaderView.findViewById(R.id.txt1);
         nameId.setText(LoginActivity.USER_NAME);
-        TextView emailId = (TextView) mHeaderView.findViewById(R.id.txt2);
+        TextView emailId = mHeaderView.findViewById(R.id.txt2);
         emailId.setText(LoginActivity.USER_EMAIL);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer);
+        drawerLayout = findViewById(R.id.drawer);
         ActionBarDrawerToggle actionBarDrawerToggle =
                 new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer) {
                     @Override
@@ -79,8 +79,8 @@ public class OverviewActivity extends AppCompatActivity implements
         if (calorieMax == 0) {
             calorieMax = LoginActivity.mSeries2;
         }
-        final CircleProgressBar steps = (CircleProgressBar) findViewById(R.id.step_progress);
-        final CircleProgressBar food = (CircleProgressBar) findViewById(R.id.food_progress);
+        final CircleProgressBar steps = findViewById(R.id.step_progress);
+        final CircleProgressBar food = findViewById(R.id.food_progress);
 
         // Animation
         TranslateAnimation translation;
@@ -182,7 +182,7 @@ public class OverviewActivity extends AppCompatActivity implements
 
 
         // On Click Listeners for Activities
-        final ImageView food_summary = (ImageView) findViewById(R.id.food_summary);
+        final ImageView food_summary = findViewById(R.id.food_summary);
         food_summary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +191,7 @@ public class OverviewActivity extends AppCompatActivity implements
             }
         });
 
-        final ImageView share_a_run = (ImageView) findViewById(R.id.share_a_run);
+        final ImageView share_a_run = findViewById(R.id.share_a_run);
         share_a_run.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +243,7 @@ public class OverviewActivity extends AppCompatActivity implements
         });
 */
         // Add Calories
-        ImageView addcal = (ImageView) findViewById(R.id.addcalories);
+        ImageView addcal = findViewById(R.id.addcalories);
         addcal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

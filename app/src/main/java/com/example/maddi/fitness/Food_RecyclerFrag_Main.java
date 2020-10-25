@@ -17,7 +17,6 @@ import com.google.firebase.database.ValueEventListener;
  * Created by maddi on 3/21/2016.
  */
 public class Food_RecyclerFrag_Main extends AppCompatActivity {
-    //private boolean mSidePanel;
     private Toolbar mToolbar;
     private android.support.v7.app.ActionBar mActionBar;
 
@@ -49,7 +48,7 @@ public class Food_RecyclerFrag_Main extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mToolbar = (Toolbar) findViewById(R.id.recycler_toolbar);
+        mToolbar = findViewById(R.id.recycler_toolbar);
         setSupportActionBar(mToolbar);
         mActionBar = getSupportActionBar();
         mActionBar.setDisplayHomeAsUpEnabled(true);

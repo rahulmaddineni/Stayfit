@@ -27,90 +27,43 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+        <!-- Facebook-->
+        <meta-data
+            tools:replace="android:value"
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
         <activity android:name="com.example.maddi.fitness.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.maddi.fitness.MainActivity">
-        </activity>
-        <activity android:name="com.example.maddi.fitness.ChartActivity"
-            android:label="Rahul Data"></activity>
-        <!--<meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>-->
-        <!--<activity android:name="com.facebook.FacebookActivity"-->
-            <!--android:configChanges=-->
-                <!--"keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
-            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
-            <!--android:label="@string/app_name" />-->
-        <meta-data
-            tools:replace="android:value"
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-        <!--<activity-->
-            <!--android:name="com.facebook.FacebookActivity"-->
-            <!--android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"-->
-            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
-            <!--android:label="@string/app_name"-->
-            <!--android:launchMode="singleInstance"-->
-            <!--android:screenOrientation="portrait"/>-->
-        <activity android:name="com.example.maddi.fitness.OverviewActivity"
-            android:label="Overview">
-
-        </activity>
-        <activity android:name="com.example.maddi.fitness.FoodSummaryActivity"
-            android:label="Food Summary">
-
-        </activity>
-        <activity android:name="com.example.maddi.fitness.AppIntroActivity"
-            android:label="AppIntro">
-
-        </activity>
-        <activity android:name="com.example.maddi.fitness.BasicInfoActivity"
-            android:label="BasicInfo">
-
-        </activity>
-        <activity android:name="com.example.maddi.fitness.EnterInfoActivity">
-
-        </activity>
-        <activity android:name="com.example.maddi.fitness.Activity_ChangeGoal"
-            android:label="Change Goals"/>
-        <activity android:name="com.example.maddi.fitness.SetGoalActivity"
-            android:label="Set Goal">
-
-        </activity>
+        <activity android:name="com.example.maddi.fitness.MainActivity" />
+        <activity android:name="com.example.maddi.fitness.ChartActivity"/>
+        <activity android:name="com.example.maddi.fitness.OverviewActivity" android:label="Overview" />
+        <activity android:name="com.example.maddi.fitness.FoodSummaryActivity" android:label="Food Summary" />
+        <activity android:name="com.example.maddi.fitness.AppIntroActivity" android:label="AppIntro" />
+        <activity android:name="com.example.maddi.fitness.EnterInfoActivity" android:label="Enter Info" />
+        <activity android:name="com.example.maddi.fitness.Activity_ChangeGoal" android:label="Change Goals"/>
+        <activity android:name="com.example.maddi.fitness.SetGoalActivity" android:label="Set Goal" />
         <activity android:name="com.example.maddi.fitness.Food_RecyclerFrag_Main"
             android:label="Add Food"
             android:configChanges="orientation|screenSize"
             android:parentActivityName="com.example.maddi.fitness.MainActivity">
         </activity>
-
-        <activity android:name="com.example.maddi.fitness.AskLocationActivity"
-            android:label="Select Location">
-
-        </activity>
-        <activity android:name="com.example.maddi.fitness.LoadMapActivity"
-            android:label="Map Loaction">
-
-        </activity>
+        <activity android:name="com.example.maddi.fitness.AskLocationActivity" android:label="Select Location" />
+        <activity android:name="com.example.maddi.fitness.LoadMapActivity" android:label="Map Loaction" />
         <activity android:name="com.example.maddi.fitness.Activity_ViewPager">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.maddi.fitness.MainActivity" />
         </activity>
-        <activity android:name="com.example.maddi.fitness.AccountActivity"
-            android:label="Settings"/>
-
+        <activity android:name="com.example.maddi.fitness.AccountActivity" android:label="Settings" />
         <service
             android:name="com.example.maddi.fitness.GeocodeAddressIntentService"
             android:exported="false"/>
-
     </application>
-    <uses-feature
-        android:name="android.hardware.sensor.stepdetector" android:required="false"/>
 
-    <uses-feature
-        android:name="android.hardware.sensor.stepcounter" android:required="false"/>
-
+    <uses-feature android:name="android.hardware.sensor.stepdetector" android:required="false"/>
+    <uses-feature android:name="android.hardware.sensor.stepcounter" android:required="false"/>
 </manifest>

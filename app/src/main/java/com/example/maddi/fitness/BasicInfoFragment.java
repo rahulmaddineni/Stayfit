@@ -57,16 +57,16 @@ public class BasicInfoFragment extends Fragment {
                     "forgot to implement onFragmentInteractionListener");
         }
 
-        final Button next = (Button) rootView.findViewById(R.id.nextbutton);
+        final Button next = rootView.findViewById(R.id.nextbutton);
 
-        final FloatingActionButton fab1 = (FloatingActionButton) getActivity().findViewById(R.id.next);
-        final EditText nameET = (EditText) rootView.findViewById(R.id.nameInput);
-        final EditText phoneET = (EditText) rootView.findViewById(R.id.phoneInput);
-        final EditText ageET = (EditText) rootView.findViewById(R.id.ageInput);
-        final EditText weightET = (EditText) rootView.findViewById(R.id.weightInput);
-        final EditText heightET = (EditText) rootView.findViewById(R.id.heightInput);
+        final FloatingActionButton fab1 = getActivity().findViewById(R.id.next);
+        final EditText nameET = rootView.findViewById(R.id.nameInput);
+        final EditText phoneET = rootView.findViewById(R.id.phoneInput);
+        final EditText ageET = rootView.findViewById(R.id.ageInput);
+        final EditText weightET = rootView.findViewById(R.id.weightInput);
+        final EditText heightET = rootView.findViewById(R.id.heightInput);
 
-        final RadioGroup myRadioGroup = (RadioGroup) rootView.findViewById(R.id.genderGroup);
+        final RadioGroup myRadioGroup = rootView.findViewById(R.id.genderGroup);
         myRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

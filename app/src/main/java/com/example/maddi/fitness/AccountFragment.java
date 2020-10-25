@@ -25,8 +25,8 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.account_fragment, container, false);
 
-        ImageView changeGoalImg = (ImageView) rootView.findViewById(R.id.settingsIcon);
-        TextView changeGoalsText = (TextView) rootView.findViewById(R.id.settingsText);
+        ImageView changeGoalImg = rootView.findViewById(R.id.settingsIcon);
+        TextView changeGoalsText = rootView.findViewById(R.id.settingsText);
 
         final OnChangeGoalListener mGoalListener;
         try {

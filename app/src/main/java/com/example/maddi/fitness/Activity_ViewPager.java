@@ -21,18 +21,18 @@ public class Activity_ViewPager extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_viewpager);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         myActionBar = getSupportActionBar();
         myActionBar.setDisplayHomeAsUpEnabled(true);
 
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout = findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab1Heading));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab2Heading));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab3Heading));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        viewPager = (ViewPager) findViewById(R.id.pager);
+        viewPager = findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 

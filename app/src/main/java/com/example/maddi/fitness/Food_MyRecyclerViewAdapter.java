@@ -68,6 +68,7 @@ public class Food_MyRecyclerViewAdapter extends RecyclerView.Adapter<Food_MyRecy
         public TextView vType;
         public TextView vCal;
         public Button vAdd;
+
         // Set Popup Window
         public RelativeLayout mRelativeLayout;
         public PopupWindow mPopupWindow;
@@ -77,10 +78,10 @@ public class Food_MyRecyclerViewAdapter extends RecyclerView.Adapter<Food_MyRecy
 
         public ViewHolder(View v) {
             super(v);
-            vTitle = (TextView) v.findViewById(R.id.title);
-            vType = (TextView) v.findViewById(R.id.type);
-            vCal = (TextView) v.findViewById(R.id.calories);
-            vAdd = (Button) v.findViewById(R.id.addfood);
+            vTitle = v.findViewById(R.id.title);
+            vType = v.findViewById(R.id.type);
+            vCal = v.findViewById(R.id.calories);
+            vAdd = v.findViewById(R.id.addfood);
             //mRelativeLayout = (RelativeLayout) v.findViewById(R.id.recyclr_frag_pop);
             mAuth = FirebaseAuth.getInstance();
             mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -93,7 +94,6 @@ public class Food_MyRecyclerViewAdapter extends RecyclerView.Adapter<Food_MyRecy
         }
 
         public void bindMovieData(final Map<String, ?> fooditem) {
-
             vTitle.setText((String) fooditem.get(("iname")));
             vType.setText((String) fooditem.get("bname"));
             // vDesc.setText((String) fooditem.get("idesc"));
@@ -129,11 +129,8 @@ public class Food_MyRecyclerViewAdapter extends RecyclerView.Adapter<Food_MyRecy
                 }
             });
             JSONArray j = null;
-
         }
     }
-
-
 }
 
 
