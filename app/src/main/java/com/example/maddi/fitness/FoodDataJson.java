@@ -1,7 +1,6 @@
 package com.example.maddi.fitness;
 
 import android.util.Log;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,100 +16,59 @@ import java.util.Map;
  */
 public class FoodDataJson {
     List<Map<String, ?>> foodList;
-    public TextView t;
-
-    public List<Map<String, ?>> getMoviesList() {
-        return foodList;
-    }
 
     public int getSize() {
         return foodList.size();
-    }
-
-    public HashMap getItem(int i) {
-        if (i >= 0 && i < foodList.size()) {
-            return (HashMap) foodList.get(i);
-        } else
-            return null;
     }
 
     public FoodDataJson() {
         foodList = new ArrayList<Map<String, ?>>();
     }
 
-    public void removeItem(int i) {
-        foodList.remove(i);
-    }
-
-    public void addItem(int position, HashMap clone) {
-        foodList.add(position, clone);
+    public void addItem(HashMap food) {
+        foodList.add(food);
     }
 
     public void downloadFoodDataJson(String json_url) throws JSONException {
-        foodList.clear(); // clear the list
+        foodList.clear(); // clear the list for each new request
 
-        String foodArray = MyUtility.downloadJSONusingHTTPGetRequest(json_url);
-        foodArray = foodArray.toString();
-        longInfo(foodArray);
-        Log.d("FoodArray", foodArray);
+        String foodJson = HTTPUtility.downloadJSONusingHTTPGetRequest(json_url);
 
-        if (foodArray == null) {
+        if (foodJson == null) {
             Log.d("MyDebugMsg", "Having trouble loading URL: " + json_url);
             return;
         }
 
-        String json = "Assuming that here is your JSON response";
         try {
-            JSONObject parentObject = new JSONObject(foodArray);
+            JSONObject parentObject = new JSONObject(foodJson);
             JSONArray hitsJsonArray = parentObject.getJSONArray("hits");
-            Log.d("hits", hitsJsonArray.toString());
-            Log.d("hits length", String.valueOf(hitsJsonArray.length()));
             for (int i = 0; i < hitsJsonArray.length(); ++i) {
-                JSONObject f = hitsJsonArray.getJSONObject(i);
-                JSONObject fi = f.getJSONObject("fields");
-                Log.d("Hits array item:", fi.toString());
-                {
-                    String iid = fi.getString("item_id");
-                    String iname = fi.getString("item_name");
-                    String bid = fi.getString("brand_id");
-                    String bname = fi.getString("brand_name");
-                    String ical = fi.getString("nf_calories");
-                    String idesc = fi.getString("item_description");
-                    String ifat = fi.getString("nf_total_fat");
-                    String iprotein = fi.getString("nf_protein");
-                    String icarbs = fi.getString("nf_total_carbohydrate");
-                    foodList.add(createFood_brief(iid, iname, bid, bname, ical, idesc, ifat, iprotein, icarbs));
-                }
+                JSONObject hit = hitsJsonArray.getJSONObject(i);
+                JSONObject fields = hit.getJSONObject("fields");
+                createFood(fields);
             }
-
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            Log.d("MyDebugMsg", "JSONException in downloadFoodDataJson");
+            Log.d("Food Data JSON", "JSONException in downloadFoodDataJson");
             e.printStackTrace();
         }
-
     }
 
-    private static HashMap createFood_brief(String iid, String iname, String bid, String bname, String ical, String idesc, String ifat, String iprotein, String icarbs) {
-        HashMap fd = new HashMap();
-
-        fd.put("iid", iid);
-        fd.put("iname", iname);
-        fd.put("bid", bid);
-        fd.put("bname", bname);
-        fd.put("ical", ical);
-        fd.put("idesc", idesc);
-        fd.put("ifat", ifat);
-        fd.put("icarbs", icarbs);
-        fd.put("iprotein", iprotein);
-        return fd;
-    }
-
-    public static void longInfo(String str) {
-        if (str.length() > 4000) {
-            Log.i("FoodArray1:", str.substring(0, 4000));
-            longInfo(str.substring(4000));
-        } else
-            Log.i("FoodArray2", str);
+    private void createFood(JSONObject fields) throws JSONException {
+        try {
+            HashMap<String, String> food = new HashMap<String, String>();
+            food.put("iid", fields.getString("item_id"));
+            food.put("iname", fields.getString("item_name"));
+            food.put("bid", fields.getString("brand_id"));
+            food.put("bname", fields.getString("brand_name"));
+            food.put("ical", fields.getString("nf_calories"));
+            food.put("idesc", fields.getString("item_description"));
+            food.put("ifat", fields.getString("nf_total_fat"));
+            food.put("icarbs", fields.getString("nf_protein"));
+            food.put("iprotein", fields.getString("nf_total_carbohydrate"));
+            addItem(food);
+        } catch (JSONException e) {
+            Log.d("AddFood Error", "Check json array for food");
+            e.printStackTrace();
+        }
     }
 }
