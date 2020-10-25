@@ -59,17 +59,11 @@ App is targeted to people of any age:
     -Content provider (Contacts Picker, SMS Manager)
 
 ## ScreenShots
+App Intro                  |Display Info               |User Basic Info
+:-------------------------:|:-------------------------:|:-------------------------:
+![Entry Steps](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%201.jpg) | ![App Intro](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%203.jpg) | ![Entry Info](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%202.jpg)
 
-![Entry Steps](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%201.jpg)
+Home Screen                |Food Search                |Essential Nutrients
+:-------------------------:|:-------------------------:|:-------------------------:
+![Home Sscreen](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%204.jpg) | ![Food Search](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%206.jpg) | ![Essential Nutrients](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%205.jpg)
 
-![Entry Info](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%202.jpg)
-
-![App Intro](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%203.jpg)
-
-![Home Screen](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%204.jpg)
-
-![Diet](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%205.jpg)
-
-![Add Food](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%206.jpg)
-
-![Share A Run](https://github.com/rahulmaddineni/Stayfit/blob/master/Screenshots/Phone%20Screenshot%207.jpg)
